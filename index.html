@@ -442,7 +442,25 @@ nav{background:var(--blue);position:sticky;top:0;z-index:300;box-shadow:0 2px 16
           <select id="rf-gender"><option value="">Select gender</option><option>Male</option><option>Female</option></select>
         </div>
         <div class="fg"><label>Royal Rangers Rank *</label>
-          <select id="rf-rank"><option value="">Select rank</option><option>Discovery</option><option>Trailblazer</option><option>Ranger</option><option>Senior Ranger</option><option>NCO</option><option>Officer</option></select>
+          <select id="rf-rank"><option value="">Select rank</option>
+            <option>Private</option>
+            <option>Lance Coporal</option>
+            <option>Coporal</option>
+            <option>Sergeant</option>
+            <option>Staff Sergeant</option>
+            <option>Warrant Officer</option>
+            <option>Master Warrant Officer</option>
+            <option>Second Lieutenant</option>
+            <option>Lieutenant</option>
+            <option>Captain</option>
+            <option>Major</option>
+            <option>Lieutenant Colonel</option>
+            <option>Colonel</option>
+            <option>Brigader General</option>
+            <option>Major General</option>
+            <option>Lieutenant General</option>
+            <option>General</option>
+            <option>Officer</option></select>
         </div>
       </div>
       <div class="fdiv">Contact & Camp Info</div>
@@ -451,8 +469,8 @@ nav{background:var(--blue);position:sticky;top:0;z-index:300;box-shadow:0 2px 16
         <div class="fg"><label>Email Address *</label><input type="email" id="rf-email" placeholder="email@example.com"></div>
       </div>
       <div class="fg2">
-        <div class="fg"><label>Outpost / Church *</label><input id="rf-outpost" placeholder="Outpost name"></div>
-        <div class="fg"><label>District / Zone *</label><input id="rf-district" placeholder="Your district"></div>
+        <div class="fg"><label>Outpost </label><input id="rf-outpost" placeholder="Outpost name"></div>
+        <div class="fg"><label>District</label><input id="rf-district" placeholder="Your district"></div>
       </div>
       <div class="fg"><label>State</label><input id="rf-state" placeholder="e.g. FCT, Lagos, Rivers"></div>
       <div class="fdiv">Emergency Contact</div>
@@ -745,8 +763,8 @@ nav{background:var(--blue);position:sticky;top:0;z-index:300;box-shadow:0 2px 16
     <div style="width:32px;height:32px;background:var(--gold2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--blue)">RR</div>
     <strong style="color:var(--gold3)">Royal Rangers Zonal Camping Program</strong>
   </div>
-  <p>Official Portal · Payment System · Firebase Powered</p>
-  <p style="margin-top:.3rem;font-size:.68rem;opacity:.4">royalrangers-zonalcamping.firebaseapp.com</p>
+  <p>Official Portal</p>
+  <p style="margin-top:.3rem;font-size:.68rem;opacity:.4">Created by Tekite Emmanuel(Big Teks)</p>
 </footer>
 
 <div class="toast" id="toast"></div>
@@ -818,9 +836,9 @@ const ST={
   activities:[], instructors:[], officials:[],
   timetable:{}, gallery:[], downloads:[], settings:{},
   categories:[
-    {id:'nco',name:'NCO',label:'Non-Commissioned Officer',price:8000,proc:200,icon:'🎖️',color:'blue',
+    {id:'nco',name:'NCO',label:'Non-Commissioned Officer',price:3000,proc:200,icon:'🎖️',color:'blue',
      perks:['Full camp participation','NCO Certificate','Camp kit','Meals included']},
-    {id:'officer',name:'Officer',label:'Camp Officer / Leader',price:15000,proc:400,icon:'⭐',color:'red',
+    {id:'officer',name:'Officer',label:'Camp Officer / Leader',price:5000,proc:400,icon:'⭐',color:'red',
      perks:['Leadership program access','Officer Certificate','Camp kit & uniform','Meals + snacks','Officers lounge access']},
   ],
   bank:{name:'First Bank of Nigeria',acctName:'Royal Rangers Zonal Camp',acctNum:'3012345678'},
