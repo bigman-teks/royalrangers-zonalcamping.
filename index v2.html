@@ -1,0 +1,1861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Royal Rangers Zonal Camp Portal</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.30.0/dist/tabler-icons.min.css">
+<style>
+:root{
+  --red:#c0392b;--red2:#e74c3c;--red-dark:#8b1a1a;
+  --blue:#1a3a6b;--blue2:#2255a4;--blue3:#3a7bd5;--blue-light:#e8f0fc;
+  --gold:#c9911a;--gold2:#f0b429;--gold3:#ffd166;--gold-light:#fdf6e0;
+  --white:#fff;--off:#f7f8fc;--dark:#0d1b2a;
+  --text:#1a1a2e;--muted:#5a6478;--border:#dde3f0;
+  --success:#1a7a4a;--success-light:#e8faf0;
+  --radius:10px;--radius-lg:16px;
+  --shadow:0 4px 20px rgba(26,58,107,.13);
+  --t:all .22s cubic-bezier(.4,0,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--off);color:var(--text);min-height:100vh}
+a{color:inherit;text-decoration:none}
+button{cursor:pointer;font-family:inherit}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-thumb{background:var(--blue2);border-radius:3px}
+
+/* ── NAV ── */
+nav{background:var(--blue);position:sticky;top:0;z-index:300;box-shadow:0 2px 16px rgba(0,0,0,.3)}
+.nav-inner{max-width:1280px;margin:0 auto;padding:0 1.25rem;display:flex;align-items:center;gap:8px}
+.nav-brand{display:flex;align-items:center;gap:9px;padding:10px 0;margin-right:auto;flex-shrink:0}
+.logo-c{width:38px;height:38px;background:var(--gold2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:var(--blue);border:2px solid var(--gold3);flex-shrink:0}
+.brand-t1{font-size:12px;font-weight:800;color:var(--gold2)}
+.brand-t2{font-size:8.5px;color:rgba(255,255,255,.5);letter-spacing:1.5px;text-transform:uppercase}
+.nav-links{display:flex;align-items:center;gap:1px;overflow-x:auto}
+.nav-links::-webkit-scrollbar{height:0}
+.nb{background:none;border:none;color:rgba(255,255,255,.72);padding:7px 8px;border-radius:6px;font-size:10.5px;font-weight:600;display:flex;align-items:center;gap:4px;white-space:nowrap;transition:var(--t)}
+.nb i{font-size:13px}
+.nb:hover,.nb.active{background:rgba(255,255,255,.12);color:var(--gold3)}
+.nb.active{border-bottom:2px solid var(--gold2)}
+.btn-admin-nav{background:var(--red);color:#fff;border:none;padding:6px 12px;border-radius:7px;font-size:11px;font-weight:700;transition:var(--t);display:flex;align-items:center;gap:4px;flex-shrink:0}
+.btn-admin-nav:hover{background:var(--red2)}
+.hamburger{display:none;background:none;border:none;color:#fff;font-size:22px;padding:4px}
+.mob-menu{display:none;position:fixed;top:58px;left:0;right:0;background:var(--blue);z-index:290;flex-direction:column;padding:.5rem;box-shadow:var(--shadow);border-top:2px solid var(--gold);max-height:calc(100vh - 58px);overflow-y:auto}
+.mob-menu.open{display:flex}
+.mob-menu .nb{justify-content:flex-start;padding:10px 12px;font-size:12px}
+
+/* ── CONN BAR ── */
+.conn-bar{background:var(--dark);color:rgba(255,255,255,.6);font-size:.7rem;text-align:center;padding:4px 1rem;display:flex;align-items:center;justify-content:center;gap:8px}
+.cdot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.cdot.live{background:#2ecc71;animation:pulse 2s infinite}
+.cdot.off{background:var(--red2)}
+.cdot.loading{background:var(--gold2);animation:pulse 1s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── PAGES ── */
+.page{display:none;max-width:1280px;margin:0 auto;padding:1.5rem 1.25rem;animation:fadeUp .28s ease}
+.page.active{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,var(--blue) 0%,var(--blue2) 45%,var(--red-dark) 100%);border-radius:var(--radius-lg);padding:3rem 2rem 2rem;color:#fff;text-align:center;position:relative;overflow:hidden;margin-bottom:1.75rem}
+.hero::before{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.02) 0,rgba(255,255,255,.02) 1px,transparent 1px,transparent 18px)}
+.hero-logo{width:72px;height:72px;background:var(--gold2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;color:var(--blue);margin:0 auto .875rem;border:4px solid var(--gold3);box-shadow:0 0 0 8px rgba(240,180,41,.15),var(--shadow)}
+.hero-badge{display:inline-block;background:var(--red);color:#fff;padding:3px 14px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:.75rem}
+.hero h1{font-size:1.85rem;font-weight:900;letter-spacing:-.5px;line-height:1.2;margin-bottom:.4rem;text-shadow:0 2px 10px rgba(0,0,0,.3)}
+.hero .motto{font-size:1rem;color:var(--gold3);font-style:italic;margin-bottom:.3rem}
+.hero .verse{font-size:.78rem;color:rgba(255,255,255,.5);margin-bottom:1.5rem}
+.countdown{display:flex;gap:10px;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap}
+.cd-box{background:rgba(0,0,0,.25);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);padding:10px 16px;min-width:64px;text-align:center}
+.cd-n{font-size:1.7rem;font-weight:900;color:var(--gold3);line-height:1}
+.cd-l{font-size:8.5px;color:rgba(255,255,255,.45);letter-spacing:2px;margin-top:2px;text-transform:uppercase}
+.hero-btns{display:flex;gap:9px;justify-content:center;flex-wrap:wrap}
+.hbtn{padding:9px 18px;border-radius:8px;font-size:12px;font-weight:700;border:none;display:flex;align-items:center;gap:6px;transition:var(--t)}
+.hbtn.gold{background:var(--gold2);color:var(--blue)}
+.hbtn.gold:hover{background:var(--gold3)}
+.hbtn.outline{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.hbtn.outline:hover{background:rgba(255,255,255,.2)}
+
+/* ── SECTION HEAD ── */
+.sh{display:flex;align-items:center;gap:9px;margin-bottom:1rem}
+.sh h2{font-size:1rem;font-weight:800;color:var(--blue)}
+.shi{width:32px;height:32px;background:var(--blue-light);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.shi i{color:var(--blue2);font-size:16px}
+.pill{background:var(--red);color:#fff;font-size:9.5px;font-weight:700;padding:2px 8px;border-radius:20px}
+
+/* ── STATS ── */
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:11px;margin-bottom:1.75rem}
+.sc{background:#fff;border-radius:var(--radius);border:1px solid var(--border);padding:1rem;transition:var(--t);position:relative;overflow:hidden}
+.sc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.sc.red::before{background:var(--red)}.sc.blue::before{background:var(--blue2)}.sc.gold::before{background:var(--gold2)}.sc.green::before{background:var(--success)}
+.sc:hover{box-shadow:var(--shadow);transform:translateY(-2px)}
+.si2{font-size:20px;margin-bottom:4px}
+.sc.red .si2{color:var(--red)}.sc.blue .si2{color:var(--blue2)}.sc.gold .si2{color:var(--gold)}.sc.green .si2{color:var(--success)}
+.sn{font-size:1.5rem;font-weight:900;color:var(--text);line-height:1}
+.sl{font-size:.7rem;color:var(--muted);font-weight:600;letter-spacing:.3px}
+
+/* ── ANNOUNCE ── */
+.ann-wrap{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:1.75rem}
+.ann-hd{background:var(--blue);padding:.65rem 1rem;display:flex;align-items:center;justify-content:space-between}
+.ann-hd span{color:var(--gold3);font-size:.82rem;font-weight:800;display:flex;align-items:center;gap:6px}
+.ldot{width:7px;height:7px;border-radius:50%;background:#e74c3c;animation:pulse 1.5s infinite}
+.ann-item{display:flex;align-items:flex-start;gap:11px;padding:.8rem 1rem;border-bottom:1px solid var(--border);transition:var(--t)}
+.ann-item:last-child{border-bottom:none}
+.ann-item:hover{background:var(--off)}
+.adot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.adot.urgent{background:var(--red)}.adot.info{background:var(--blue2)}.adot.update{background:var(--gold2)}
+.ab{flex:1}
+.ab strong{font-size:.83rem;color:var(--text);display:block}
+.ab p{font-size:.76rem;color:var(--muted);margin-top:1px;line-height:1.5}
+.at{font-size:.68rem;color:var(--muted);white-space:nowrap;flex-shrink:0}
+.atag{display:inline-block;font-size:.62rem;font-weight:700;padding:2px 7px;border-radius:10px;margin-right:4px}
+.atag.urgent{background:#fde8e8;color:var(--red)}.atag.info{background:var(--blue-light);color:var(--blue2)}.atag.update{background:var(--gold-light);color:var(--gold)}
+
+/* ── QUICK GRID ── */
+.qg{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:11px;margin-bottom:1.75rem}
+.qc{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.1rem .875rem;text-align:center;transition:var(--t);cursor:pointer}
+.qc:hover{border-color:var(--blue2);box-shadow:var(--shadow);transform:translateY(-3px)}
+.qci{width:46px;height:46px;border-radius:11px;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem;font-size:22px;transition:var(--t)}
+.qci.red{background:#fde8e8;color:var(--red)}.qci.blue{background:var(--blue-light);color:var(--blue2)}.qci.gold{background:var(--gold-light);color:var(--gold)}
+.qc:hover .qci{transform:scale(1.1)}
+.qc h3{font-size:.8rem;font-weight:800;color:var(--text);margin-bottom:.15rem}
+.qc p{font-size:.7rem;color:var(--muted)}
+
+/* ── CARDS / BOXES ── */
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.4rem;margin-bottom:1rem}
+.card h2{font-size:.92rem;font-weight:800;color:var(--blue);display:flex;align-items:center;gap:7px;margin-bottom:.875rem;padding-bottom:.7rem;border-bottom:2px solid var(--gold2)}
+.card h2 i{color:var(--red)}
+.card p{font-size:.85rem;line-height:1.75;color:var(--text);margin-bottom:.7rem}
+.chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{background:var(--blue-light);color:var(--blue2);padding:4px 12px;border-radius:20px;font-size:.73rem;font-weight:700;border:1px solid #c5d8f5}
+.chip.gold{background:var(--gold-light);color:var(--gold);border-color:#f0d080}
+.chip.red{background:#fde8e8;color:var(--red);border-color:#f5b8b8}
+.chip.green{background:var(--success-light);color:var(--success);border-color:#a7d7b8}
+
+/* ── FORMS ── */
+.fg{margin-bottom:.8rem}
+.fg label{display:block;font-size:.76rem;font-weight:700;color:var(--text);margin-bottom:.35rem}
+.fg input,.fg textarea,.fg select{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:9px 12px;font-size:.875rem;outline:none;font-family:inherit;transition:var(--t);background:#fff;color:var(--text)}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--blue2);box-shadow:0 0 0 3px rgba(34,85,164,.1)}
+.fg textarea{resize:vertical;min-height:75px}
+.fg2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.fdiv{font-size:.72rem;font-weight:800;color:var(--blue2);text-transform:uppercase;letter-spacing:1px;margin:1.1rem 0 .65rem;display:flex;align-items:center;gap:7px}
+.fdiv::after{content:'';flex:1;height:1px;background:var(--border)}
+.btn{padding:9px 20px;border-radius:8px;font-size:.85rem;font-weight:700;border:none;display:inline-flex;align-items:center;gap:6px;transition:var(--t);cursor:pointer}
+.btn.blue{background:var(--blue);color:#fff}
+.btn.blue:hover{background:var(--blue2);box-shadow:0 4px 12px rgba(34,85,164,.25)}
+.btn.red{background:var(--red);color:#fff}
+.btn.red:hover{background:var(--red2)}
+.btn.gold{background:var(--gold2);color:var(--blue)}
+.btn.gold:hover{background:var(--gold3)}
+.btn.green{background:var(--success);color:#fff}
+.btn.outline{background:#fff;border:1.5px solid var(--border);color:var(--muted)}
+.btn.outline:hover{border-color:var(--blue2);color:var(--blue2)}
+.btn.sm{padding:6px 13px;font-size:.76rem}
+.btn.full{width:100%;justify-content:center}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+
+/* ── SEARCH ROW ── */
+.sr{display:flex;gap:9px;margin-bottom:1.1rem;flex-wrap:wrap}
+.si{flex:1;min-width:170px;border:1.5px solid var(--border);border-radius:8px;padding:8px 12px;font-size:.85rem;outline:none;transition:var(--t);background:#fff}
+.si:focus{border-color:var(--blue2);box-shadow:0 0 0 3px rgba(34,85,164,.1)}
+
+/* ── TABLE ── */
+.tw{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:.82rem;min-width:600px}
+.tbl thead{background:var(--blue)}
+.tbl th{padding:.7rem 1rem;text-align:left;color:rgba(255,255,255,.85);font-size:.71rem;font-weight:700;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
+.tbl td{padding:.65rem 1rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tbody tr:hover td{background:var(--blue-light)}
+.status-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:.68rem;font-weight:700}
+.sb-paid{background:var(--success-light);color:var(--success)}
+.sb-pending{background:var(--gold-light);color:var(--gold)}
+.sb-failed{background:#fde8e8;color:var(--red)}
+.sb-active{background:var(--blue-light);color:var(--blue2)}
+
+/* ══════════════════════════════════════════
+   PAYMENT SYSTEM SPECIFIC
+══════════════════════════════════════════ */
+/* PROGRESS STEPS */
+.progress-steps{display:flex;align-items:center;margin-bottom:2rem;overflow-x:auto;padding:.5rem 0}
+.step{display:flex;flex-direction:column;align-items:center;flex:1;min-width:70px;position:relative}
+.step:not(:last-child)::after{content:'';position:absolute;top:16px;left:60%;width:80%;height:2px;background:var(--border);z-index:0}
+.step.done:not(:last-child)::after,.step.active:not(:last-child)::after{background:var(--blue2)}
+.step-circle{width:32px;height:32px;border-radius:50%;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:800;color:var(--muted);transition:var(--t);z-index:1;position:relative}
+.step.active .step-circle{border-color:var(--blue2);background:var(--blue2);color:#fff}
+.step.done .step-circle{border-color:var(--success);background:var(--success);color:#fff}
+.step-lbl{font-size:.67rem;color:var(--muted);margin-top:5px;text-align:center;font-weight:600;white-space:nowrap}
+.step.active .step-lbl{color:var(--blue2)}
+.step.done .step-lbl{color:var(--success)}
+
+/* CATEGORY CARDS */
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px;margin-bottom:1.5rem}
+.cat-card{background:#fff;border:2px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;cursor:pointer;transition:var(--t);position:relative;overflow:hidden}
+.cat-card:hover{border-color:var(--blue2);box-shadow:var(--shadow)}
+.cat-card.selected{border-color:var(--blue2);background:var(--blue-light)}
+.cat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--red),var(--blue2))}
+.cat-badge{position:absolute;top:14px;right:14px;background:var(--gold2);color:var(--blue);font-size:.7rem;font-weight:800;padding:3px 9px;border-radius:20px}
+.cat-icon{font-size:32px;margin-bottom:.75rem;display:block}
+.cat-card h3{font-size:1rem;font-weight:800;color:var(--blue);margin-bottom:.3rem}
+.cat-card .cat-price{font-size:1.5rem;font-weight:900;color:var(--red);margin:.4rem 0}
+.cat-card .cat-price span{font-size:.8rem;color:var(--muted);font-weight:500}
+.cat-card p{font-size:.78rem;color:var(--muted);line-height:1.5}
+.cat-card .perks{margin-top:.75rem;display:flex;flex-direction:column;gap:4px}
+.cat-card .perk{font-size:.72rem;color:var(--text);display:flex;align-items:center;gap:6px}
+.cat-card .perk i{color:var(--success);font-size:13px}
+.cat-selected-badge{position:absolute;top:14px;left:14px;background:var(--blue2);color:#fff;font-size:.65rem;font-weight:800;padding:2px 8px;border-radius:20px;display:none}
+.cat-card.selected .cat-selected-badge{display:block}
+
+/* PAYMENT SECTION */
+.pay-wrap{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1rem}
+.pay-summary{background:var(--blue-light);border:1px solid var(--border);border-radius:var(--radius);padding:1rem;margin-bottom:1.25rem}
+.pay-summary h4{font-size:.88rem;font-weight:800;color:var(--blue);margin-bottom:.65rem;display:flex;align-items:center;gap:6px}
+.pay-row{display:flex;justify-content:space-between;font-size:.82rem;padding:.3rem 0;border-bottom:1px solid rgba(0,0,0,.06)}
+.pay-row:last-child{border-bottom:none;font-weight:800;color:var(--text);font-size:.9rem;margin-top:.3rem;padding-top:.5rem;border-top:2px solid var(--border)}
+.pay-row:last-child .amt{color:var(--red);font-size:1rem}
+.pay-gateways{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin-bottom:1.25rem}
+.gw-card{background:#fff;border:2px solid var(--border);border-radius:var(--radius);padding:.875rem;cursor:pointer;transition:var(--t);text-align:center}
+.gw-card:hover{border-color:var(--blue2)}
+.gw-card.selected{border-color:var(--blue2);background:var(--blue-light)}
+.gw-card .gw-name{font-size:.85rem;font-weight:800;color:var(--text);margin-bottom:.2rem}
+.gw-card .gw-tag{font-size:.68rem;color:var(--muted)}
+.gw-logo{font-size:28px;margin-bottom:.4rem;display:block}
+.pay-btn-row{display:flex;gap:10px;flex-wrap:wrap}
+.secure-badge{display:flex;align-items:center;gap:6px;font-size:.72rem;color:var(--muted);margin-top:.875rem}
+.secure-badge i{color:var(--success);font-size:14px}
+
+/* RECEIPT */
+.receipt-wrap{max-width:560px;margin:0 auto}
+.receipt{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;box-shadow:var(--shadow)}
+.receipt-hd{background:linear-gradient(135deg,var(--blue),var(--blue2));padding:1.5rem;text-align:center;color:#fff}
+.receipt-hd .r-logo{width:56px;height:56px;background:var(--gold2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:900;color:var(--blue);margin:0 auto .75rem;border:3px solid var(--gold3)}
+.receipt-hd h2{font-size:1.05rem;font-weight:800;margin-bottom:.2rem}
+.receipt-hd p{font-size:.78rem;opacity:.75}
+.receipt-body{padding:1.5rem}
+.r-row{display:flex;justify-content:space-between;align-items:flex-start;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.82rem;gap:1rem}
+.r-row:last-child{border-bottom:none}
+.r-lbl{color:var(--muted);font-weight:600;flex-shrink:0}
+.r-val{color:var(--text);font-weight:700;text-align:right;word-break:break-all}
+.receipt-total{background:var(--blue);color:#fff;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center}
+.receipt-total .lbl{font-size:.85rem;opacity:.8}
+.receipt-total .amt{font-size:1.3rem;font-weight:900;color:var(--gold3)}
+.receipt-ft{background:var(--success-light);border-top:2px solid #a7d7b8;padding:.875rem 1.5rem;text-align:center;color:var(--success);font-size:.8rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:7px}
+.qr-placeholder{width:100px;height:100px;background:linear-gradient(135deg,var(--blue-light),var(--gold-light));border:2px dashed var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;margin:0 auto .75rem;font-size:36px;color:var(--blue2)}
+
+/* ADMIN PAYMENT DASHBOARD */
+.pay-dash-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:12px;margin-bottom:1.75rem}
+.pd-card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.25rem;cursor:pointer;transition:var(--t);text-align:center}
+.pd-card:hover{border-color:var(--blue2);background:var(--blue-light);transform:translateY(-2px)}
+.pd-card i{font-size:26px;color:var(--blue2);margin-bottom:.5rem;display:block}
+.pd-card h3{font-size:.8rem;font-weight:800;color:var(--text)}
+.pd-card p{font-size:.7rem;color:var(--muted);margin-top:.15rem}
+.panel{display:none;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.5rem;margin-bottom:1.5rem}
+.panel.show{display:block}
+.ph{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.1rem}
+.ph h3{font-size:.95rem;font-weight:800;color:var(--blue)}
+
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(13,27,42,.65);z-index:500;display:none;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(3px)}
+.modal-overlay.open{display:flex}
+.modal{background:#fff;border-radius:var(--radius-lg);width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow);animation:fadeUp .3s ease}
+.modal-hd{background:var(--blue);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;border-radius:var(--radius-lg) var(--radius-lg) 0 0}
+.modal-hd h3{font-size:.95rem;font-weight:800;color:#fff}
+.modal-body{padding:1.25rem}
+.modal-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:20px;line-height:1;cursor:pointer}
+.modal-close:hover{color:#fff}
+
+/* EMPTY / LOADING */
+.empty{text-align:center;padding:2.5rem 1rem;color:var(--muted)}
+.empty i{font-size:40px;display:block;margin-bottom:.65rem;opacity:.3}
+.empty p{font-size:.83rem;line-height:1.6}
+.spin{width:34px;height:34px;border:3px solid var(--border);border-top-color:var(--blue2);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto .65rem}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading{text-align:center;padding:2.5rem;color:var(--muted);font-size:.83rem}
+
+/* TOAST */
+.toast{position:fixed;bottom:1.25rem;right:1.25rem;z-index:999;padding:.8rem 1.1rem;border-radius:var(--radius);box-shadow:var(--shadow);font-size:.83rem;font-weight:600;display:flex;align-items:center;gap:8px;transform:translateY(80px);opacity:0;transition:all .38s cubic-bezier(.4,0,.2,1);max-width:300px;color:#fff}
+.toast.show{transform:none;opacity:1}
+.toast.success{background:var(--success)}
+.toast.error{background:var(--red)}
+.toast.info{background:var(--blue2)}
+
+/* MISC */
+.divider{height:1px;background:var(--border);margin:1.25rem 0}
+.text-muted{color:var(--muted);font-size:.78rem}
+.tag{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.68rem;font-weight:700}
+.tag.green{background:var(--success-light);color:var(--success)}
+.tag.gold{background:var(--gold-light);color:var(--gold)}
+.tag.red{background:#fde8e8;color:var(--red)}
+.tag.blue{background:var(--blue-light);color:var(--blue2)}
+.reg-id{font-family:monospace;font-size:.82rem;background:var(--off);padding:2px 8px;border-radius:5px;color:var(--blue2);font-weight:700}
+
+/* ADMIN LOGIN */
+.admin-lc{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:2.5rem;max-width:400px;margin:2rem auto;box-shadow:var(--shadow)}
+.admin-logo{width:64px;height:64px;background:var(--blue);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;color:var(--gold2);margin:0 auto 1.1rem;border:3px solid var(--gold2)}
+.admin-dash{display:none}
+.admin-dash.show{display:block}
+.admin-topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;padding:.7rem 1rem;background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);flex-wrap:wrap;gap:9px}
+.welcome{font-size:.88rem;font-weight:800;color:var(--blue);display:flex;align-items:center;gap:7px}
+.log-item{display:flex;justify-content:space-between;align-items:center;padding:.45rem 0;border-bottom:1px solid var(--border);font-size:.8rem}
+.log-item:last-child{border-bottom:none}
+
+/* RESPONSIVE */
+@media(max-width:900px){.nav-links{display:none}.hamburger{display:block}.fg2{grid-template-columns:1fr}}
+@media(max-width:640px){.hero h1{font-size:1.4rem}.hero{padding:2.25rem 1.1rem 1.75rem}.page{padding:1rem .875rem}.tbl{font-size:.77rem}.tbl th,.tbl td{padding:.55rem .75rem}.cat-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- CONN BAR -->
+<div class="conn-bar">
+  <div class="cdot loading" id="cdot"></div>
+  <span id="ctext">Connecting to Firebase…</span>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <div class="logo-c">RR</div>
+      <div><div class="brand-t1">Royal Rangers</div><div class="brand-t2">Zonal Camp Portal</div></div>
+    </div>
+    <div class="nav-links" id="navlinks">
+      <button class="nb active" onclick="go('home',this)"><i class="ti ti-home"></i>Home</button>
+      <button class="nb" onclick="go('register',this)"><i class="ti ti-user-plus"></i>Register</button>
+      <button class="nb" onclick="go('verify',this)"><i class="ti ti-search"></i>Verify</button>
+      <button class="nb" onclick="go('timetable',this)"><i class="ti ti-calendar"></i>Timetable</button>
+      <button class="nb" onclick="go('activities',this)"><i class="ti ti-run"></i>Activities</button>
+      <button class="nb" onclick="go('instructors',this)"><i class="ti ti-users"></i>Instructors</button>
+      <button class="nb" onclick="go('officials',this)"><i class="ti ti-crown"></i>Officials</button>
+      <button class="nb" onclick="go('notifications',this)"><i class="ti ti-bell"></i>Updates</button>
+      <button class="nb" onclick="go('gallery',this)"><i class="ti ti-photo"></i>Gallery</button>
+      <button class="nb" onclick="go('downloads',this)"><i class="ti ti-download"></i>Downloads</button>
+      <button class="nb" onclick="go('contact',this)"><i class="ti ti-phone"></i>Contact</button>
+    </div>
+    <div style="display:flex;gap:6px;flex-shrink:0">
+      <button class="btn-admin-nav" onclick="go('admin',null)"><i class="ti ti-lock"></i>Admin</button>
+      <button class="hamburger" onclick="toggleMenu()"><i class="ti ti-menu-2"></i></button>
+    </div>
+  </div>
+</nav>
+<div class="mob-menu" id="mobmenu">
+  <button class="nb" onclick="go('home',this);toggleMenu()"><i class="ti ti-home"></i>Home</button>
+  <button class="nb" onclick="go('register',this);toggleMenu()"><i class="ti ti-user-plus"></i>Register & Pay</button>
+  <button class="nb" onclick="go('verify',this);toggleMenu()"><i class="ti ti-search"></i>Verify Registration</button>
+  <button class="nb" onclick="go('timetable',this);toggleMenu()"><i class="ti ti-calendar"></i>Timetable</button>
+  <button class="nb" onclick="go('activities',this);toggleMenu()"><i class="ti ti-run"></i>Activities</button>
+  <button class="nb" onclick="go('instructors',this);toggleMenu()"><i class="ti ti-users"></i>Instructors</button>
+  <button class="nb" onclick="go('officials',this);toggleMenu()"><i class="ti ti-crown"></i>Officials</button>
+  <button class="nb" onclick="go('notifications',this);toggleMenu()"><i class="ti ti-bell"></i>Updates</button>
+  <button class="nb" onclick="go('gallery',this);toggleMenu()"><i class="ti ti-photo"></i>Gallery</button>
+  <button class="nb" onclick="go('downloads',this);toggleMenu()"><i class="ti ti-download"></i>Downloads</button>
+  <button class="nb" onclick="go('contact',this);toggleMenu()"><i class="ti ti-phone"></i>Contact</button>
+  <button class="nb" onclick="go('admin',null);toggleMenu()"><i class="ti ti-lock"></i>Admin</button>
+</div>
+
+<!-- ════ HOME ════ -->
+<div class="page active" id="page-home">
+  <div class="hero">
+    <div class="hero-logo">RR</div>
+    <div class="hero-badge">⭐ Official Portal — Firebase Live</div>
+    <h1 id="hero-title">Royal Rangers<br>Zonal Camping Program</h1>
+    <div class="motto" id="hero-motto">"Rangers Lead the Way!"</div>
+    <div class="verse" id="hero-verse">Joshua 1:9 — "Be strong and courageous."</div>
+    <div class="countdown">
+      <div class="cd-box"><div class="cd-n" id="cd-d">--</div><div class="cd-l">Days</div></div>
+      <div class="cd-box"><div class="cd-n" id="cd-h">--</div><div class="cd-l">Hours</div></div>
+      <div class="cd-box"><div class="cd-n" id="cd-m">--</div><div class="cd-l">Mins</div></div>
+      <div class="cd-box"><div class="cd-n" id="cd-s">--</div><div class="cd-l">Secs</div></div>
+    </div>
+    <div class="hero-btns">
+      <button class="hbtn gold" onclick="go('register',null)"><i class="ti ti-user-plus"></i>Register & Pay</button>
+      <button class="hbtn outline" onclick="go('verify',null)"><i class="ti ti-search"></i>Verify Registration</button>
+      <button class="hbtn outline" onclick="go('timetable',null)"><i class="ti ti-calendar"></i>Schedule</button>
+    </div>
+  </div>
+
+  <div class="stats" id="home-stats">
+    <div class="sc blue"><i class="ti ti-users si2"></i><div class="sn" id="s-total">—</div><div class="sl">Total Registered</div></div>
+    <div class="sc green"><i class="ti ti-check si2"></i><div class="sn" id="s-paid">—</div><div class="sl">Payments Verified</div></div>
+    <div class="sc gold"><i class="ti ti-clock si2"></i><div class="sn" id="s-pending">—</div><div class="sl">Pending Payment</div></div>
+    <div class="sc red"><i class="ti ti-currency-naira si2"></i><div class="sn" id="s-revenue">—</div><div class="sl">Total Revenue (₦)</div></div>
+    <div class="sc blue"><i class="ti ti-run si2"></i><div class="sn" id="s-activities">—</div><div class="sl">Activities</div></div>
+  </div>
+
+  <div class="ann-wrap">
+    <div class="ann-hd"><span><div class="ldot"></div> Live Announcements</span><span style="font-size:.68rem;color:rgba(255,255,255,.4)">Real-time</span></div>
+    <div id="home-ann"><div class="loading"><div class="spin"></div>Loading…</div></div>
+  </div>
+
+  <div class="sh"><div class="shi"><i class="ti ti-layout-grid"></i></div><h2>Quick Access</h2></div>
+  <div class="qg">
+    <div class="qc" onclick="go('register',null)"><div class="qci gold"><i class="ti ti-credit-card"></i></div><h3>Register & Pay</h3><p>Join the camp</p></div>
+    <div class="qc" onclick="go('verify',null)"><div class="qci blue"><i class="ti ti-search"></i></div><h3>Verify</h3><p>Check registration</p></div>
+    <div class="qc" onclick="go('timetable',null)"><div class="qci blue"><i class="ti ti-calendar"></i></div><h3>Timetable</h3><p>Daily schedule</p></div>
+    <div class="qc" onclick="go('activities',null)"><div class="qci red"><i class="ti ti-run"></i></div><h3>Activities</h3><p>Camp activities</p></div>
+    <div class="qc" onclick="go('instructors',null)"><div class="qci blue"><i class="ti ti-users"></i></div><h3>Instructors</h3><p>Meet the team</p></div>
+    <div class="qc" onclick="go('gallery',null)"><div class="qci red"><i class="ti ti-photo"></i></div><h3>Gallery</h3><p>Photos & videos</p></div>
+    <div class="qc" onclick="go('downloads',null)"><div class="qci gold"><i class="ti ti-download"></i></div><h3>Downloads</h3><p>Camp materials</p></div>
+    <div class="qc" onclick="go('contact',null)"><div class="qci red"><i class="ti ti-phone"></i></div><h3>Contact</h3><p>Get in touch</p></div>
+  </div>
+</div>
+
+<!-- ════ REGISTER & PAY ════ -->
+<div class="page" id="page-register">
+  <div class="sh"><div class="shi"><i class="ti ti-credit-card"></i></div><h2>Camp Registration & Payment</h2></div>
+
+  <!-- PROGRESS -->
+  <div class="progress-steps" id="reg-progress">
+    <div class="step active" id="ps1"><div class="step-circle">1</div><div class="step-lbl">Category</div></div>
+    <div class="step" id="ps2"><div class="step-circle">2</div><div class="step-lbl">Details</div></div>
+    <div class="step" id="ps3"><div class="step-circle">3</div><div class="step-lbl">Payment</div></div>
+    <div class="step" id="ps4"><div class="step-circle">4</div><div class="step-lbl">Receipt</div></div>
+  </div>
+
+  <!-- STEP 1: CATEGORY -->
+  <div id="reg-step1">
+    <div class="sh"><div class="shi"><i class="ti ti-tag"></i></div><h2>Choose Registration Category</h2></div>
+    <div class="cat-grid" id="cat-cards"></div>
+    <div style="text-align:center;margin-top:.5rem">
+      <button class="btn blue" onclick="goStep(2)" id="btn-cat-next" disabled><i class="ti ti-arrow-right"></i>Continue to Details</button>
+    </div>
+  </div>
+
+  <!-- STEP 2: FORM -->
+  <div id="reg-step2" style="display:none">
+    <div class="sh"><div class="shi"><i class="ti ti-user"></i></div><h2>Camper Information</h2></div>
+    <div class="card">
+      <div class="fdiv">Personal Details</div>
+      <div class="fg2">
+        <div class="fg"><label>First Name *</label><input id="rf-fname" placeholder="First name"></div>
+        <div class="fg"><label>Last Name *</label><input id="rf-lname" placeholder="Last name"></div>
+      </div>
+      <div class="fg2">
+        <div class="fg"><label>Date of Birth *</label><input type="date" id="rf-dob"></div>
+        <div class="fg"><label>Age</label><input type="number" id="rf-age" placeholder="Age" min="5" max="70" readonly></div>
+      </div>
+      <div class="fg2">
+        <div class="fg"><label>Gender *</label>
+          <select id="rf-gender"><option value="">Select gender</option><option>Male</option><option>Female</option></select>
+        </div>
+        <div class="fg"><label>Royal Rangers Rank *</label>
+          <select id="rf-rank"><option value="">Select rank</option>
+            <option>Private</option>
+            <option>Lance Coporal</option>
+            <option>Coporal</option>
+            <option>Sergeant</option>
+            <option>Staff Sergeant</option>
+            <option>Warrant Officer</option>
+            <option>Master Warrant Officer</option>
+            <option>Second Lieutenant</option>
+            <option>Lieutenant</option>
+            <option>Captain</option>
+            <option>Major</option>
+            <option>Lieutenant Colonel</option>
+            <option>Colonel</option>
+            <option>Brigader General</option>
+            <option>Major General</option>
+            <option>Lieutenant General</option>
+            <option>General</option>
+            <option>Officer</option></select>
+        </div>
+      </div>
+      <div class="fdiv">Contact & Camp Info</div>
+      <div class="fg2">
+        <div class="fg"><label>Phone Number *</label><input type="tel" id="rf-phone" placeholder="+234 800 000 0000"></div>
+        <div class="fg"><label>Email Address *</label><input type="email" id="rf-email" placeholder="email@example.com"></div>
+      </div>
+      <div class="fg2">
+        <div class="fg"><label>Outpost </label><input id="rf-outpost" placeholder="Outpost name"></div>
+        <div class="fg"><label>District</label><input id="rf-district" placeholder="Your district"></div>
+      </div>
+      <div class="fg"><label>State</label><input id="rf-state" placeholder="e.g. FCT, Lagos, Rivers"></div>
+      <div class="fdiv">Emergency Contact</div>
+      <div class="fg2">
+        <div class="fg"><label>Guardian / Parent Name *</label><input id="rf-guardian" placeholder="Full name"></div>
+        <div class="fg"><label>Emergency Phone *</label><input type="tel" id="rf-emergency" placeholder="+234 800 000 0000"></div>
+      </div>
+      <div class="fg"><label>Medical Conditions (if any)</label><textarea id="rf-medical" placeholder="Allergies, conditions, medications…"></textarea></div>
+      <div class="fdiv">Passport Photograph</div>
+      <div class="fg">
+        <label>Upload Passport Photo *</label>
+        <div id="photo-drop" style="border:2px dashed var(--border);border-radius:8px;padding:1.5rem;text-align:center;cursor:pointer;transition:var(--t);background:var(--off)" onclick="document.getElementById('rf-photo').click()">
+          <i class="ti ti-camera" style="font-size:28px;color:var(--blue2);display:block;margin-bottom:.4rem"></i>
+          <div style="font-size:.82rem;color:var(--muted)">Click to upload passport photo</div>
+          <div style="font-size:.72rem;color:var(--muted);margin-top:.2rem">JPG, PNG — max 2MB</div>
+          <div id="photo-preview" style="margin-top:.75rem"></div>
+        </div>
+        <input type="file" id="rf-photo" accept="image/*" style="display:none" onchange="previewPhoto(this)">
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn outline" onclick="goStep(1)"><i class="ti ti-arrow-left"></i>Back</button>
+      <button class="btn blue" onclick="goStep(3)"><i class="ti ti-arrow-right"></i>Continue to Payment</button>
+    </div>
+  </div>
+
+  <!-- STEP 3: PAYMENT -->
+  <div id="reg-step3" style="display:none">
+    <div class="sh"><div class="shi"><i class="ti ti-credit-card"></i></div><h2>Payment</h2></div>
+    <div class="pay-wrap">
+      <div class="pay-summary">
+        <h4><i class="ti ti-receipt" style="font-size:16px"></i> Payment Summary</h4>
+        <div class="pay-row"><span>Category</span><span id="ps-cat">—</span></div>
+        <div class="pay-row"><span>Registrant</span><span id="ps-name">—</span></div>
+        <div class="pay-row"><span>Outpost</span><span id="ps-outpost">—</span></div>
+        <div class="pay-row"><span>Camp Fee</span><span id="ps-fee">₦0</span></div>
+        <div class="pay-row"><span>Processing Fee</span><span id="ps-proc">₦0</span></div>
+        <div class="pay-row"><span class="amt">Total Amount</span><span class="amt" id="ps-total">₦0</span></div>
+      </div>
+
+      <div class="fdiv">Select Payment Gateway</div>
+      <div class="pay-gateways" id="gateway-cards">
+        <div class="gw-card selected" data-gw="paystack" onclick="selectGW(this,'paystack')">
+          <span class="gw-logo">💳</span>
+          <div class="gw-name">Paystack</div>
+          <div class="gw-tag">Cards · Bank · USSD</div>
+        </div>
+        <div class="gw-card" data-gw="flutterwave" onclick="selectGW(this,'flutterwave')">
+          <span class="gw-logo">🦋</span>
+          <div class="gw-name">Flutterwave</div>
+          <div class="gw-tag">Cards · Mobile Money</div>
+        </div>
+        <div class="gw-card" data-gw="monnify" onclick="selectGW(this,'monnify')">
+          <span class="gw-logo">🏦</span>
+          <div class="gw-name">Monnify</div>
+          <div class="gw-tag">Bank Transfer · USSD</div>
+        </div>
+        <div class="gw-card" data-gw="manual" onclick="selectGW(this,'manual')">
+          <span class="gw-logo">🧾</span>
+          <div class="gw-name">Manual / Bank</div>
+          <div class="gw-tag">Bank transfer + upload proof</div>
+        </div>
+      </div>
+
+      <!-- MANUAL PAYMENT DETAILS -->
+      <div id="manual-pay-info" style="display:none;background:var(--gold-light);border:1px solid var(--gold3);border-radius:var(--radius);padding:1rem;margin-bottom:1rem">
+        <h4 style="font-size:.85rem;font-weight:800;color:var(--blue);margin-bottom:.65rem;display:flex;align-items:center;gap:6px"><i class="ti ti-building-bank"></i> Bank Transfer Details</h4>
+        <div class="pay-row" style="font-size:.82rem"><span style="color:var(--muted)">Bank</span><span id="bank-name" style="font-weight:700">—</span></div>
+        <div class="pay-row" style="font-size:.82rem"><span style="color:var(--muted)">Account Name</span><span id="acct-name" style="font-weight:700">—</span></div>
+        <div class="pay-row" style="font-size:.82rem"><span style="color:var(--muted)">Account Number</span><span id="acct-num" style="font-weight:700;font-size:.95rem;color:var(--blue)">—</span></div>
+        <div class="fg" style="margin-top:.875rem"><label>Upload Payment Proof / Teller *</label><input type="file" id="rf-teller" accept="image/*,.pdf"></div>
+      </div>
+
+      <div class="pay-btn-row">
+        <button class="btn blue" id="pay-now-btn" onclick="initiatePayment()"><i class="ti ti-lock"></i>Pay Now — <span id="pay-btn-amount">₦0</span></button>
+        <button class="btn outline" onclick="goStep(2)"><i class="ti ti-arrow-left"></i>Back</button>
+      </div>
+      <div class="secure-badge"><i class="ti ti-shield-check"></i> Secured & encrypted payment. Your data is safe.</div>
+    </div>
+  </div>
+
+  <!-- STEP 4: RECEIPT -->
+  <div id="reg-step4" style="display:none">
+    <div class="sh"><div class="shi"><i class="ti ti-check"></i></div><h2>Registration Complete</h2></div>
+    <div class="receipt-wrap">
+      <div class="receipt" id="receipt-card">
+        <div class="receipt-hd">
+          <div class="r-logo">RR</div>
+          <h2>Registration Receipt</h2>
+          <p>Royal Rangers Zonal Camping Program</p>
+        </div>
+        <div class="receipt-body">
+          <div class="qr-placeholder" id="qr-area"><i class="ti ti-qrcode"></i></div>
+          <p style="text-align:center;font-size:.72rem;color:var(--muted);margin-bottom:1rem">Scan QR at camp check-in</p>
+          <div class="r-row"><span class="r-lbl">Registration ID</span><span class="r-val" id="r-id" style="color:var(--blue2);font-size:.9rem;font-family:monospace"></span></div>
+          <div class="r-row"><span class="r-lbl">Full Name</span><span class="r-val" id="r-name"></span></div>
+          <div class="r-row"><span class="r-lbl">Category</span><span class="r-val" id="r-cat"></span></div>
+          <div class="r-row"><span class="r-lbl">Rank</span><span class="r-val" id="r-rank"></span></div>
+          <div class="r-row"><span class="r-lbl">Outpost</span><span class="r-val" id="r-outpost"></span></div>
+          <div class="r-row"><span class="r-lbl">District</span><span class="r-val" id="r-district"></span></div>
+          <div class="r-row"><span class="r-lbl">Phone</span><span class="r-val" id="r-phone"></span></div>
+          <div class="r-row"><span class="r-lbl">Email</span><span class="r-val" id="r-email"></span></div>
+          <div class="r-row"><span class="r-lbl">Payment Ref</span><span class="r-val" id="r-ref" style="font-family:monospace"></span></div>
+          <div class="r-row"><span class="r-lbl">Payment Status</span><span class="r-val" id="r-status"></span></div>
+          <div class="r-row"><span class="r-lbl">Date</span><span class="r-val" id="r-date"></span></div>
+        </div>
+        <div class="receipt-total">
+          <div class="lbl">Amount Paid</div>
+          <div class="amt" id="r-amount">₦0</div>
+        </div>
+        <div class="receipt-ft"><i class="ti ti-check-circle"></i> Registration Submitted — Present this receipt at camp check-in</div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:1.1rem;flex-wrap:wrap">
+        <button class="btn blue" onclick="printReceipt()"><i class="ti ti-printer"></i>Print Receipt</button>
+        <button class="btn gold" onclick="downloadReceipt()"><i class="ti ti-download"></i>Download PDF</button>
+        <button class="btn outline" onclick="resetReg()"><i class="ti ti-user-plus"></i>New Registration</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════ VERIFY REGISTRATION ════ -->
+<div class="page" id="page-verify">
+  <div class="sh"><div class="shi"><i class="ti ti-search"></i></div><h2>Verify Registration</h2></div>
+  <div class="card" style="max-width:520px;margin:0 auto">
+    <h2><i class="ti ti-badge"></i> Registration Lookup</h2>
+    <div class="fg"><label>Registration ID or Payment Reference</label><input id="verify-input" placeholder="e.g. RRC-2025-0001 or PAY-REF-…"></div>
+    <button class="btn blue full" onclick="verifyReg()"><i class="ti ti-search"></i>Search Registration</button>
+    <div id="verify-result" style="margin-top:1rem"></div>
+  </div>
+</div>
+
+<!-- ════ TIMETABLE ════ -->
+<div class="page" id="page-timetable">
+  <div class="sh"><div class="shi"><i class="ti ti-calendar"></i></div><h2>Camp Timetable</h2></div>
+  <div class="day-tabs" id="day-tabs" style="display:flex;gap:6px;margin-bottom:1rem;flex-wrap:wrap"></div>
+  <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden">
+    <div style="background:var(--blue);padding:.8rem 1.1rem;display:grid;grid-template-columns:85px 1fr 120px 140px;gap:10px;color:rgba(255,255,255,.8);font-size:.71rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px">
+      <div>Time</div><div>Activity</div><div>Venue</div><div>Instructor</div>
+    </div>
+    <div id="tt-body"><div class="empty"><i class="ti ti-calendar-off"></i><p>No schedule yet. Admin can add timetable entries.</p></div></div>
+  </div>
+</div>
+
+<!-- ════ ACTIVITIES ════ -->
+<div class="page" id="page-activities">
+  <div class="sh"><div class="shi"><i class="ti ti-run"></i></div><h2>Camp Activities</h2><span class="pill" id="act-count">0</span></div>
+  <div id="act-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:13px">
+    <div class="empty" style="grid-column:1/-1"><i class="ti ti-run"></i><p>No activities yet.</p></div>
+  </div>
+</div>
+
+<!-- ════ INSTRUCTORS ════ -->
+<div class="page" id="page-instructors">
+  <div class="sh"><div class="shi"><i class="ti ti-users"></i></div><h2>Instructors</h2><span class="pill" id="instr-count">0</span></div>
+  <div class="sr">
+    <input class="si" id="instr-q" placeholder="Search…" oninput="renderInstructors()">
+    <select class="si" id="instr-dept" onchange="renderInstructors()" style="max-width:190px">
+      <option value="">All Departments</option>
+      <option>Spiritual</option><option>Drill &amp; Parade</option><option>Medical</option><option>Leadership</option><option>Sports</option><option>Survival Skills</option>
+    </select>
+  </div>
+  <div id="instr-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(225px,1fr));gap:13px">
+    <div class="empty" style="grid-column:1/-1"><i class="ti ti-users"></i><p>No instructors yet.</p></div>
+  </div>
+</div>
+
+<!-- ════ OFFICIALS ════ -->
+<div class="page" id="page-officials">
+  <div class="sh"><div class="shi"><i class="ti ti-crown"></i></div><h2>Camp Officials</h2></div>
+  <div id="officials-cont"><div class="empty"><i class="ti ti-crown"></i><p>No officials yet.</p></div></div>
+</div>
+
+<!-- ════ NOTIFICATIONS ════ -->
+<div class="page" id="page-notifications">
+  <div class="sh"><div class="shi"><i class="ti ti-bell"></i></div><h2>Notifications & Briefings</h2></div>
+  <div id="notif-list" style="display:flex;flex-direction:column;gap:10px"><div class="empty"><i class="ti ti-bell-off"></i><p>No notifications yet.</p></div></div>
+</div>
+
+<!-- ════ GALLERY ════ -->
+<div class="page" id="page-gallery">
+  <div class="sh"><div class="shi"><i class="ti ti-photo"></i></div><h2>Media Gallery</h2></div>
+  <div id="gcats" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1rem"><button style="background:var(--blue);color:#fff;border:none;border-radius:20px;padding:5px 14px;font-size:.76rem;font-weight:700">All</button></div>
+  <div id="ggrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:10px"><div class="empty" style="grid-column:1/-1"><i class="ti ti-photo-off"></i><p>No media yet.</p></div></div>
+</div>
+
+<!-- ════ DOWNLOADS ════ -->
+<div class="page" id="page-downloads">
+  <div class="sh"><div class="shi"><i class="ti ti-download"></i></div><h2>Downloads & Resources</h2></div>
+  <div id="dlgrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:11px"><div class="empty" style="grid-column:1/-1"><i class="ti ti-file-off"></i><p>No resources yet.</p></div></div>
+</div>
+
+<!-- ════ CONTACT ════ -->
+<div class="page" id="page-contact">
+  <div class="sh"><div class="shi"><i class="ti ti-phone"></i></div><h2>Contact Us</h2></div>
+  <div style="background:linear-gradient(135deg,var(--red-dark),var(--red));border-radius:var(--radius-lg);padding:1rem 1.25rem;display:flex;align-items:center;gap:12px;margin-bottom:1.25rem;color:#fff">
+    <i class="ti ti-urgent" style="font-size:28px;flex-shrink:0"></i>
+    <div><strong style="display:block;font-size:.88rem">Emergency Contacts</strong><span id="c-emerg" style="font-size:.8rem;opacity:.85">Loading…</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.1rem">
+    <div class="card">
+      <h2><i class="ti ti-info-circle"></i> Information</h2>
+      <div style="display:flex;align-items:flex-start;gap:9px;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.82rem"><i class="ti ti-map-pin" style="color:var(--blue2);font-size:16px;margin-top:2px;flex-shrink:0"></i><span id="c-loc">Loading…</span></div>
+      <div style="display:flex;align-items:flex-start;gap:9px;padding:.5rem 0;border-bottom:1px solid var(--border);font-size:.82rem"><i class="ti ti-mail" style="color:var(--blue2);font-size:16px;margin-top:2px;flex-shrink:0"></i><span id="c-email">Loading…</span></div>
+      <div style="display:flex;align-items:flex-start;gap:9px;padding:.5rem 0;font-size:.82rem"><i class="ti ti-phone" style="color:var(--blue2);font-size:16px;margin-top:2px;flex-shrink:0"></i><span id="c-phone">Loading…</span></div>
+    </div>
+    <div class="card">
+      <h2><i class="ti ti-mail"></i> Send Message</h2>
+      <div class="fg"><label>Name</label><input id="cf-n" placeholder="Your name"></div>
+      <div class="fg"><label>Email</label><input type="email" id="cf-e" placeholder="your@email.com"></div>
+      <div class="fg"><label>Message</label><textarea id="cf-m" placeholder="Your message…"></textarea></div>
+      <button class="btn blue" onclick="sendMsg()"><i class="ti ti-send"></i>Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- ════ ADMIN ════ -->
+<div class="page" id="page-admin">
+  <div id="admin-login-view">
+    <div class="admin-lc">
+      <div class="admin-logo">RR</div>
+      <h2 style="font-size:1rem;font-weight:900;color:var(--blue);text-align:center;margin-bottom:.2rem">Admin Dashboard</h2>
+      <p style="font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:1.5rem">Authorized personnel only</p>
+      <div class="fg"><label>Email</label><input type="email" id="a-email" placeholder="admin@rangers.org"></div>
+      <div class="fg"><label>Password</label><input type="password" id="a-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')adminLogin()"></div>
+      <button class="btn blue full" style="margin-top:.25rem" onclick="adminLogin()"><i class="ti ti-login"></i>Login</button>
+      <div id="a-err" style="font-size:.76rem;color:var(--red);text-align:center;margin-top:.75rem;display:none"></div>
+      <p style="font-size:.7rem;color:var(--muted);text-align:center;margin-top:1rem">🔐 Firebase Authentication</p>
+    </div>
+  </div>
+
+  <div class="admin-dash" id="admin-dash">
+    <div class="admin-topbar">
+      <div class="welcome"><i class="ti ti-shield-check" style="color:var(--gold)"></i>Admin Dashboard</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <span id="admin-email-disp" style="font-size:.76rem;color:var(--muted)"></span>
+        <button class="btn outline sm" onclick="adminLogout()"><i class="ti ti-logout"></i>Logout</button>
+      </div>
+    </div>
+
+    <!-- PAYMENT STATS -->
+    <div class="sh"><div class="shi"><i class="ti ti-currency-naira"></i></div><h2>Payment Overview</h2></div>
+    <div class="stats">
+      <div class="sc blue"><i class="ti ti-users si2"></i><div class="sn" id="a-total">0</div><div class="sl">Total Registrations</div></div>
+      <div class="sc green"><i class="ti ti-check si2"></i><div class="sn" id="a-paid">0</div><div class="sl">Payments Verified</div></div>
+      <div class="sc gold"><i class="ti ti-clock si2"></i><div class="sn" id="a-pending">0</div><div class="sl">Pending</div></div>
+      <div class="sc red"><i class="ti ti-x si2"></i><div class="sn" id="a-failed">0</div><div class="sl">Failed</div></div>
+      <div class="sc green"><i class="ti ti-currency-naira si2"></i><div class="sn" id="a-revenue">0</div><div class="sl">Revenue (₦)</div></div>
+    </div>
+
+    <!-- MANAGEMENT CARDS -->
+    <div class="sh"><div class="shi"><i class="ti ti-settings"></i></div><h2>Management</h2></div>
+    <div class="pay-dash-grid">
+      <div class="pd-card" onclick="openPanel('pay-records')"><i class="ti ti-receipt"></i><h3>Payment Records</h3><p>View all transactions</p></div>
+      <div class="pd-card" onclick="openPanel('verify-payment')"><i class="ti ti-check-circle"></i><h3>Verify Payment</h3><p>Manual verification</p></div>
+      <div class="pd-card" onclick="openPanel('add-category')"><i class="ti ti-tag"></i><h3>Manage Categories</h3><p>Set fees per category</p></div>
+      <div class="pd-card" onclick="openPanel('bank-settings')"><i class="ti ti-building-bank"></i><h3>Bank Details</h3><p>Update account info</p></div>
+      <div class="pd-card" onclick="openPanel('post-announce')"><i class="ti ti-speakerphone"></i><h3>Announcement</h3><p>Post update</p></div>
+      <div class="pd-card" onclick="openPanel('add-timetable')"><i class="ti ti-calendar-plus"></i><h3>Timetable</h3><p>Add sessions</p></div>
+      <div class="pd-card" onclick="openPanel('add-activity')"><i class="ti ti-run"></i><h3>Activities</h3><p>Add camp activity</p></div>
+      <div class="pd-card" onclick="openPanel('add-instructor')"><i class="ti ti-users-plus"></i><h3>Instructors</h3><p>Add instructor</p></div>
+      <div class="pd-card" onclick="openPanel('add-official')"><i class="ti ti-crown"></i><h3>Officials</h3><p>Add official</p></div>
+      <div class="pd-card" onclick="openPanel('add-gallery')"><i class="ti ti-photo-up"></i><h3>Gallery</h3><p>Upload media</p></div>
+      <div class="pd-card" onclick="openPanel('add-download')"><i class="ti ti-file-upload"></i><h3>Resources</h3><p>Upload files</p></div>
+      <div class="pd-card" onclick="openPanel('camp-settings')"><i class="ti ti-settings"></i><h3>Camp Settings</h3><p>Configure portal</p></div>
+      <div class="pd-card" onclick="openPanel('add-notification')"><i class="ti ti-bell-plus"></i><h3>Notification</h3><p>Send push update</p></div>
+      <div class="pd-card" onclick="exportPayments()"><i class="ti ti-file-export"></i><h3>Export Data</h3><p>PDF / Excel report</p></div>
+    </div>
+
+    <!-- PANEL -->
+    <div class="panel" id="admin-panel">
+      <div class="ph">
+        <h3 id="panel-title">Panel</h3>
+        <button class="btn outline sm" onclick="closePanel()"><i class="ti ti-x"></i>Close</button>
+      </div>
+      <div id="panel-body"></div>
+    </div>
+
+    <!-- ACTIVITY LOG -->
+    <div class="card">
+      <h2><i class="ti ti-activity"></i> Activity Log</h2>
+      <div id="alog"><div style="font-size:.8rem;color:var(--muted);text-align:center;padding:1rem">No activity yet.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer style="background:var(--dark);color:rgba(255,255,255,.5);text-align:center;padding:1.25rem;margin-top:2.5rem;font-size:.78rem">
+  <div style="display:flex;align-items:center;justify-content:center;gap:9px;margin-bottom:.65rem">
+    <div style="width:32px;height:32px;background:var(--gold2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--blue)">RR</div>
+    <strong style="color:var(--gold3)">Royal Rangers Zonal Camping Program</strong>
+  </div>
+  <p>Official Portal</p>
+  <p style="margin-top:.3rem;font-size:.68rem;opacity:.4">Created by Tekite Emmanuel(Big Teks)</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <div class="modal-hd"><h3 id="modal-title">Title</h3><button class="modal-close" onclick="closeModal()">&times;</button></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- FIREBASE SDK -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-app-compat.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-firestore-compat.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-auth-compat.min.js"></script>
+
+<script>
+/* ════════════════════════════════════════════
+   FIREBASE CONFIG
+════════════════════════════════════════════ */
+const FBCONFIG = {
+  apiKey:"AIzaSyCMwITk9cLv-m0d2sXyGURxaFwAB7FToRc",
+  authDomain:"royalrangers-zonalcamping.firebaseapp.com",
+  projectId:"royalrangers-zonalcamping",
+  storageBucket:"royalrangers-zonalcamping.firebasestorage.app",
+  messagingSenderId:"1097111667980",
+  appId:"1:1097111667980:web:665c8bd67a764fa4ed3529",
+  measurementId:"G-GDS7N7MZ22"
+};
+
+let db, auth, fbReady=false;
+
+function initFB(){
+  try{
+    firebase.initializeApp(FBCONFIG);
+    db=firebase.firestore();
+    auth=firebase.auth();
+    fbReady=true;
+    setConn('live','🔥 Firebase Connected — royalrangers-zonalcamping');
+    loadAll();
+    auth.onAuthStateChanged(u=>{
+      if(u){
+        document.getElementById('admin-login-view').style.display='none';
+        document.getElementById('admin-dash').classList.add('show');
+        document.getElementById('admin-email-disp').textContent=u.email;
+        loadAll();
+        setupRealtime();
+      } else {
+        document.getElementById('admin-login-view').style.display='block';
+        document.getElementById('admin-dash').classList.remove('show');
+      }
+    });
+  }catch(e){
+    setConn('off','⚠️ Firebase unavailable — offline mode');
+  }
+}
+
+function setConn(state,txt){
+  document.getElementById('cdot').className='cdot '+state;
+  document.getElementById('ctext').textContent=txt;
+}
+
+/* ════════════════════════════════════════════
+   STATE
+════════════════════════════════════════════ */
+const ST={
+  registrations:[], announcements:[], notifications:[],
+  activities:[], instructors:[], officials:[],
+  timetable:{}, gallery:[], downloads:[], settings:{},
+  categories:[
+    {id:'nco',name:'NCO',label:'Non-Commissioned Officer',price:3000,proc:200,icon:'🎖️',color:'blue',
+     perks:['Full camp participation','NCO Certificate','Camp kit','Meals included']},
+    {id:'officer',name:'Officer',label:'Camp Officer / Leader',price:5000,proc:400,icon:'⭐',color:'red',
+     perks:['Leadership program access','Officer Certificate','Camp kit & uniform','Meals + snacks','Officers lounge access']},
+  ],
+  bank:{name:'First Bank of Nigeria',acctName:'Royal Rangers Zonal Camp',acctNum:'3012345678'},
+  selectedCat:null, selectedGW:'paystack', logs:[]
+};
+
+/* ════════════════════════════════════════════
+   FIRESTORE HELPERS
+════════════════════════════════════════════ */
+async function fsCol(col){
+  if(!fbReady) return [];
+  try{
+    const s=await db.collection(col).orderBy('createdAt','desc').get();
+    return s.docs.map(d=>({id:d.id,...d.data()}));
+  }catch(_){
+    try{const s=await db.collection(col).get();return s.docs.map(d=>({id:d.id,...d.data()}));}
+    catch(__){return [];}
+  }
+}
+async function fsAdd(col,data){
+  if(!fbReady) return {id:'local-'+Date.now()};
+  return db.collection(col).add({...data,createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+}
+async function fsUpdate(col,id,data){
+  if(!fbReady) return;
+  return db.collection(col).doc(id).update(data);
+}
+async function fsSet(col,id,data){
+  if(!fbReady) return;
+  return db.collection(col).doc(id).set(data,{merge:true});
+}
+async function fsGetOne(col,id){
+  if(!fbReady) return null;
+  try{const d=await db.collection(col).doc(id).get();return d.exists?{id:d.id,...d.data()}:null;}
+  catch(_){return null;}
+}
+async function fsQuery(col,field,op,val){
+  if(!fbReady) return [];
+  try{
+    const s=await db.collection(col).where(field,op,val).get();
+    return s.docs.map(d=>({id:d.id,...d.data()}));
+  }catch(_){return [];}
+}
+
+async function loadAll(){
+  const [regs,ann,notif,acts,instr,offs,gal,dl]=await Promise.all([
+    fsCol('registrations'),fsCol('announcements'),fsCol('notifications'),
+    fsCol('activities'),fsCol('instructors'),fsCol('officials'),
+    fsCol('gallery'),fsCol('downloads')
+  ]);
+  ST.registrations=regs; ST.announcements=ann; ST.notifications=notif;
+  ST.activities=acts; ST.instructors=instr; ST.officials=offs;
+  ST.gallery=gal; ST.downloads=dl;
+  // timetable
+  const tt=await fsCol('timetable');
+  ST.timetable={};
+  tt.forEach(r=>{const d=r.day||'Day 1';ST.timetable[d]=ST.timetable[d]||[];ST.timetable[d].push(r);});
+  Object.keys(ST.timetable).forEach(d=>ST.timetable[d].sort((a,b)=>(a.time||'').localeCompare(b.time||'')));
+  // settings
+  const s=await fsGetOne('settings','camp');
+  if(s){ST.settings=s;applySettings(s);}
+  // categories from db
+  const cats=await fsCol('categories');
+  if(cats.length) ST.categories=cats;
+  // bank
+  const bank=await fsGetOne('settings','bank');
+  if(bank) ST.bank=bank;
+
+  renderAll();
+}
+
+function setupRealtime(){
+  if(!fbReady) return;
+  db.collection('registrations').onSnapshot(s=>{
+    ST.registrations=s.docs.map(d=>({id:d.id,...d.data()}));
+    updateStats(); renderPaymentRecords();
+  });
+  db.collection('announcements').orderBy('createdAt','desc').limit(10).onSnapshot(s=>{
+    ST.announcements=s.docs.map(d=>({id:d.id,...d.data()}));
+    renderHomeAnn();
+  });
+}
+
+function renderAll(){
+  updateStats(); renderHomeAnn(); renderCategories();
+  renderActivities(); renderInstructors(); renderOfficials();
+  renderNotifications(); renderGallery(); renderDownloads(); renderTimetable();
+  applyContactInfo();
+}
+
+function applySettings(s){
+  if(s.title) document.getElementById('hero-title').innerHTML=s.title.replace(/\\n/g,'<br>');
+  if(s.motto) document.getElementById('hero-motto').textContent=s.motto;
+  if(s.verse) document.getElementById('hero-verse').textContent=s.verse;
+  if(s.campDate){ST.settings.campDate=s.campDate;}
+  ST.settings=Object.assign(ST.settings,s);
+}
+function applyContactInfo(){
+  const s=ST.settings;
+  el('c-loc').textContent=s.location||'Camp location to be confirmed';
+  el('c-email').textContent=s.email||'—';
+  el('c-phone').textContent=s.phone||'—';
+  el('c-emerg').textContent=s.emergency||'Contact admin for emergency numbers';
+}
+
+/* ════════════════════════════════════════════
+   STATS
+════════════════════════════════════════════ */
+function updateStats(){
+  const regs=ST.registrations;
+  const paid=regs.filter(r=>r.paymentStatus==='paid').length;
+  const pending=regs.filter(r=>r.paymentStatus==='pending'||!r.paymentStatus).length;
+  const revenue=regs.filter(r=>r.paymentStatus==='paid').reduce((s,r)=>s+(r.amount||0),0);
+  setEl('s-total',regs.length);setEl('s-paid',paid);setEl('s-pending',pending);
+  setEl('s-revenue',fmtNaira(revenue));setEl('s-activities',ST.activities.length);
+  setEl('a-total',regs.length);setEl('a-paid',paid);setEl('a-pending',pending);
+  setEl('a-failed',regs.filter(r=>r.paymentStatus==='failed').length);
+  setEl('a-revenue',fmtNaira(revenue));
+}
+
+/* ════════════════════════════════════════════
+   HOME ANNOUNCEMENTS
+════════════════════════════════════════════ */
+function renderHomeAnn(){
+  const el2=el('home-ann');
+  if(!ST.announcements.length){
+    el2.innerHTML=`<div class="empty" style="padding:1.5rem"><i class="ti ti-speakerphone"></i><p>No announcements yet. Post from Admin.</p></div>`;return;
+  }
+  el2.innerHTML=ST.announcements.slice(0,5).map(a=>`
+    <div class="ann-item">
+      <div class="adot ${a.type||'info'}"></div>
+      <div class="ab" style="flex:1">
+        <strong><span class="atag ${a.type||'info'}">${a.type==='urgent'?'URGENT':a.type==='update'?'UPDATE':'INFO'}</span>${a.title||''}</strong>
+        <p>${a.body||''}</p>
+      </div>
+      <div class="at">${fmtTs(a.createdAt)}</div>
+    </div>`).join('');
+}
+
+/* ════════════════════════════════════════════
+   REGISTRATION CATEGORIES
+════════════════════════════════════════════ */
+function renderCategories(){
+  const g=el('cat-cards');
+  g.innerHTML=ST.categories.map(c=>`
+    <div class="cat-card" id="cat-${c.id}" onclick="selectCat('${c.id}')">
+      <div class="cat-badge">${c.name}</div>
+      <div class="cat-selected-badge">✓ Selected</div>
+      <span class="cat-icon">${c.icon||'🎖️'}</span>
+      <h3>${c.name}</h3>
+      <div style="font-size:.78rem;color:var(--muted);margin-bottom:.25rem">${c.label||''}</div>
+      <div class="cat-price">₦${(c.price||0).toLocaleString()}<span> / camper</span></div>
+      <p>${c.desc||'Full camp registration for '+c.name+' category.'}</p>
+      <div class="perks">${(c.perks||[]).map(p=>`<div class="perk"><i class="ti ti-check"></i>${p}</div>`).join('')}</div>
+    </div>`).join('');
+}
+
+function selectCat(id){
+  ST.selectedCat=ST.categories.find(c=>c.id===id);
+  document.querySelectorAll('.cat-card').forEach(c=>{
+    c.classList.remove('selected');
+    if(c.id==='cat-'+id) c.classList.add('selected');
+  });
+  el('btn-cat-next').disabled=false;
+}
+
+/* ════════════════════════════════════════════
+   STEP NAVIGATION
+════════════════════════════════════════════ */
+function goStep(n){
+  if(n===3){
+    // Validate form
+    const required=['rf-fname','rf-lname','rf-dob','rf-gender','rf-rank','rf-phone','rf-email','rf-outpost','rf-district','rf-guardian','rf-emergency'];
+    for(const id of required){
+      if(!v(id)){toast('Please fill in all required fields.','error');el(id).focus();return;}
+    }
+    populatePaymentSummary();
+  }
+  [1,2,3,4].forEach(i=>{
+    el('reg-step'+i).style.display=i===n?'block':'none';
+  });
+  // Update progress
+  ['ps1','ps2','ps3','ps4'].forEach((id,i)=>{
+    const s=el(id);
+    s.classList.remove('active','done');
+    if(i+1<n) s.classList.add('done');
+    else if(i+1===n) s.classList.add('active');
+    if(s.querySelector('.step-circle').innerHTML===String(i+1)&&i+1<n)
+      s.querySelector('.step-circle').innerHTML='<i class="ti ti-check" style="font-size:13px"></i>';
+    else s.querySelector('.step-circle').innerHTML=String(i+1);
+  });
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function populatePaymentSummary(){
+  const cat=ST.selectedCat;
+  if(!cat) return;
+  const name=`${v('rf-fname')} ${v('rf-lname')}`;
+  const total=cat.price+(cat.proc||0);
+  setEl('ps-cat',cat.name+' — '+cat.label);
+  setEl('ps-name',name);
+  setEl('ps-outpost',v('rf-outpost'));
+  setEl('ps-fee',`₦${cat.price.toLocaleString()}`);
+  setEl('ps-proc',`₦${(cat.proc||0).toLocaleString()}`);
+  setEl('ps-total',`₦${total.toLocaleString()}`);
+  setEl('pay-btn-amount',`₦${total.toLocaleString()}`);
+}
+
+/* ════════════════════════════════════════════
+   GATEWAY SELECTION
+════════════════════════════════════════════ */
+function selectGW(card,gw){
+  document.querySelectorAll('.gw-card').forEach(c=>c.classList.remove('selected'));
+  card.classList.add('selected');
+  ST.selectedGW=gw;
+  el('manual-pay-info').style.display=gw==='manual'?'block':'none';
+  if(gw==='manual'){
+    setEl('bank-name',ST.bank.name||'—');
+    setEl('acct-name',ST.bank.acctName||'—');
+    setEl('acct-num',ST.bank.acctNum||'—');
+  }
+}
+
+/* ════════════════════════════════════════════
+   PAYMENT INITIATION
+════════════════════════════════════════════ */
+async function initiatePayment(){
+  const cat=ST.selectedCat;
+  if(!cat){toast('No category selected.','error');return;}
+  const gw=ST.selectedGW;
+  const total=(cat.price+(cat.proc||0))*100; // kobo
+  const email=v('rf-email');
+  const name=`${v('rf-fname')} ${v('rf-lname')}`;
+  const ref='RRC-'+Date.now()+'-'+Math.random().toString(36).substr(2,6).toUpperCase();
+  const regData={
+    name,email,phone:v('rf-phone'),outpost:v('rf-outpost'),
+    district:v('rf-district'),state:v('rf-state'),rank:v('rf-rank'),
+    gender:v('rf-gender'),dob:v('rf-dob'),age:v('rf-age'),
+    guardian:v('rf-guardian'),emergency:v('rf-emergency'),
+    medical:v('rf-medical'),category:cat.id,categoryName:cat.name,
+    amount:cat.price,processingFee:cat.proc||0,
+    totalAmount:cat.price+(cat.proc||0),
+    paymentRef:ref,paymentGateway:gw,
+    paymentStatus:gw==='manual'?'pending':'pending',
+    registrationStatus:'pending',
+    regId:ref,createdAt:new Date().toISOString()
+  };
+
+  if(gw==='manual'){
+    // Manual payment — save as pending and show receipt
+    await saveRegistration(regData);
+    showReceipt(regData,'pending');
+    return;
+  }
+
+  // Paystack integration
+  if(gw==='paystack'){
+    const key=ST.settings.paystackKey||'pk_test_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+    if(key.includes('test_xxx')){
+      // No real key — simulate for demo
+      await simulatePayment(regData,ref);
+      return;
+    }
+    const handler=PaystackPop.setup({
+      key,email,amount:total,currency:'NGN',
+      ref,firstname:v('rf-fname'),lastname:v('rf-lname'),phone:v('rf-phone'),
+      metadata:{custom_fields:[{display_name:'Category',variable_name:'category',value:cat.name},{display_name:'Outpost',variable_name:'outpost',value:v('rf-outpost')}]},
+      onClose:()=>toast('Payment window closed. You can try again.','error'),
+      callback:async r=>{
+        regData.paymentRef=r.reference;
+        regData.paymentStatus='paid';
+        regData.registrationStatus='active';
+        regData.paymentDate=new Date().toISOString();
+        await saveRegistration(regData);
+        showReceipt(regData,'paid');
+      }
+    });
+    handler.openIframe();
+    return;
+  }
+
+  // Flutterwave
+  if(gw==='flutterwave'){
+    const key=ST.settings.flutterwaveKey||'';
+    if(!key){await simulatePayment(regData,ref);return;}
+    FlutterwaveCheckout({
+      public_key:key,tx_ref:ref,amount:cat.price+(cat.proc||0),currency:'NGN',
+      customer:{email,phone_number:v('rf-phone'),name},
+      customizations:{title:'Royal Rangers Zonal Camp',description:'Camp Registration — '+cat.name},
+      callback:async r=>{
+        if(r.status==='successful'){
+          regData.paymentStatus='paid';regData.registrationStatus='active';
+          regData.paymentDate=new Date().toISOString();
+        }
+        await saveRegistration(regData);
+        showReceipt(regData,regData.paymentStatus);
+      },
+      onclose:()=>toast('Payment window closed.','error')
+    });
+    return;
+  }
+
+  // Monnify / fallback
+  await simulatePayment(regData,ref);
+}
+
+async function simulatePayment(regData,ref){
+  // No live key — simulate success for demonstration
+  toast('Processing payment…','info');
+  await new Promise(r=>setTimeout(r,1800));
+  regData.paymentStatus='paid';
+  regData.registrationStatus='active';
+  regData.paymentDate=new Date().toISOString();
+  regData.note='Gateway key not configured. Add Paystack/Flutterwave key in Admin → Camp Settings.';
+  await saveRegistration(regData);
+  showReceipt(regData,'paid');
+}
+
+async function saveRegistration(data){
+  try{
+    if(fbReady){
+      const ref=await fsAdd('registrations',data);
+      data.firestoreId=ref.id;
+    } else {
+      ST.registrations.push(data);
+    }
+    logAction(`✅ Registration: ${data.name} — ${data.regId} — ${data.categoryName}`);
+    updateStats();
+    toast('Registration saved!','success');
+  }catch(e){toast('Save error: '+e.message,'error');}
+}
+
+/* ════════════════════════════════════════════
+   RECEIPT
+════════════════════════════════════════════ */
+function showReceipt(d,status){
+  goStep(4);
+  setEl('r-id',d.regId||d.paymentRef);
+  setEl('r-name',d.name);
+  setEl('r-cat',d.categoryName);
+  setEl('r-rank',d.rank);
+  setEl('r-outpost',d.outpost);
+  setEl('r-district',d.district);
+  setEl('r-phone',d.phone);
+  setEl('r-email',d.email);
+  setEl('r-ref',d.paymentRef);
+  setEl('r-date',new Date().toLocaleString());
+  setEl('r-amount',`₦${((d.totalAmount||d.amount||0)).toLocaleString()}`);
+  const sbEl=el('r-status');
+  if(status==='paid'){
+    sbEl.innerHTML='<span class="status-badge sb-paid"><i class="ti ti-check" style="font-size:11px"></i> PAID & VERIFIED</span>';
+  } else {
+    sbEl.innerHTML='<span class="status-badge sb-pending"><i class="ti ti-clock" style="font-size:11px"></i> PENDING VERIFICATION</span>';
+  }
+  // QR placeholder with ID
+  el('qr-area').innerHTML=`<div style="font-size:.6rem;font-weight:800;color:var(--blue2);word-break:break-all;text-align:center;padding:.5rem">${d.regId}</div>`;
+}
+
+function printReceipt(){window.print();}
+function downloadReceipt(){
+  const w=window.open('','_blank');
+  const body=el('receipt-card').outerHTML;
+  w.document.write(`<html><head><title>Receipt — ${el('r-id').textContent}</title>
+  <style>body{font-family:sans-serif;padding:1.5rem;max-width:500px;margin:0 auto}
+  .receipt-hd{background:#1a3a6b;padding:1.5rem;text-align:center;color:#fff;border-radius:10px 10px 0 0}
+  .receipt-body{padding:1.25rem;border:1px solid #dde3f0;border-top:none}
+  .r-row{display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid #eee;font-size:.82rem}
+  .receipt-total{background:#1a3a6b;color:#fff;padding:.875rem 1.5rem;display:flex;justify-content:space-between}
+  .receipt-ft{background:#e8faf0;padding:.75rem;text-align:center;font-size:.78rem;color:#1a7a4a}
+  </style></head><body>${body}<script>window.print()<\/script></body></html>`);
+  w.document.close();
+}
+
+function resetReg(){
+  ST.selectedCat=null;
+  document.querySelectorAll('#page-register input,#page-register select,#page-register textarea').forEach(e=>e.value='');
+  document.querySelectorAll('.cat-card').forEach(c=>c.classList.remove('selected'));
+  el('btn-cat-next').disabled=true;
+  el('photo-preview').innerHTML='';
+  goStep(1);
+}
+
+/* ════════════════════════════════════════════
+   VERIFY REGISTRATION
+════════════════════════════════════════════ */
+async function verifyReg(){
+  const q=el('verify-input').value.trim();
+  const res=el('verify-result');
+  if(!q){toast('Enter a registration ID or reference.','error');return;}
+  res.innerHTML=`<div class="loading"><div class="spin"></div>Searching…</div>`;
+  let found=null;
+  try{
+    const byId=await fsQuery('registrations','regId','==',q);
+    const byRef=await fsQuery('registrations','paymentRef','==',q);
+    found=[...byId,...byRef][0] || ST.registrations.find(r=>r.regId===q||r.paymentRef===q);
+  }catch(_){ found=ST.registrations.find(r=>r.regId===q||r.paymentRef===q); }
+  if(!found){
+    res.innerHTML=`<div class="empty"><i class="ti ti-search"></i><p>No registration found for <strong>${q}</strong>.<br>Check the ID and try again.</p></div>`;
+    return;
+  }
+  const st=found.paymentStatus==='paid'?'<span class="status-badge sb-paid">✓ PAID & ACTIVE</span>':
+    found.paymentStatus==='pending'?'<span class="status-badge sb-pending">⏳ PENDING</span>':
+    '<span class="status-badge sb-failed">✗ FAILED</span>';
+  res.innerHTML=`
+    <div class="card" style="border-left:4px solid var(--${found.paymentStatus==='paid'?'success':'gold'})">
+      <h2><i class="ti ti-badge-check"></i> Registration Found</h2>
+      <div class="r-row" style="display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.83rem"><span style="color:var(--muted)">Registration ID</span><span class="reg-id">${found.regId||'—'}</span></div>
+      <div class="r-row" style="display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.83rem"><span style="color:var(--muted)">Name</span><span style="font-weight:700">${found.name}</span></div>
+      <div class="r-row" style="display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.83rem"><span style="color:var(--muted)">Category</span><span style="font-weight:700">${found.categoryName||'—'}</span></div>
+      <div class="r-row" style="display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.83rem"><span style="color:var(--muted)">Outpost</span><span>${found.outpost||'—'}</span></div>
+      <div class="r-row" style="display:flex;justify-content:space-between;padding:.4rem 0;border-bottom:1px solid var(--border);font-size:.83rem"><span style="color:var(--muted)">Amount Paid</span><span style="font-weight:800;color:var(--blue)">₦${(found.totalAmount||0).toLocaleString()}</span></div>
+      <div class="r-row" style="display:flex;justify-content:space-between;padding:.4rem 0;font-size:.83rem"><span style="color:var(--muted)">Status</span>${st}</div>
+    </div>`;
+}
+
+/* ════════════════════════════════════════════
+   PHOTO PREVIEW
+════════════════════════════════════════════ */
+function previewPhoto(input){
+  if(!input.files[0]) return;
+  const r=new FileReader();
+  r.onload=e=>{
+    el('photo-preview').innerHTML=`<img src="${e.target.result}" style="width:80px;height:80px;border-radius:50%;object-fit:cover;border:3px solid var(--blue2)">`;
+    el('photo-drop').style.borderColor='var(--blue2)';
+  };
+  r.readAsDataURL(input.files[0]);
+}
+
+/* ════════════════════════════════════════════
+   AUTO-CALC AGE
+════════════════════════════════════════════ */
+document.getElementById('rf-dob').addEventListener('change',function(){
+  if(this.value){
+    const age=Math.floor((Date.now()-new Date(this.value))/(365.25*864e5));
+    document.getElementById('rf-age').value=age;
+  }
+});
+
+/* ════════════════════════════════════════════
+   ACTIVITIES
+════════════════════════════════════════════ */
+const acols=['blue','red','gold'];
+function renderActivities(){
+  const g=el('act-grid');
+  if(!g) return;
+  setEl('act-count',ST.activities.length);
+  if(!ST.activities.length){
+    g.innerHTML=`<div class="empty" style="grid-column:1/-1"><i class="ti ti-run"></i><p>No activities yet.</p></div>`;return;
+  }
+  g.innerHTML=ST.activities.map((a,i)=>`
+    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:var(--t)" onmouseenter="this.style.boxShadow='var(--shadow)'" onmouseleave="this.style.boxShadow='none'">
+      <div style="background:${i%3===0?'linear-gradient(135deg,var(--blue),var(--blue2))':i%3===1?'linear-gradient(135deg,var(--red-dark),var(--red))':'linear-gradient(135deg,#b8860b,var(--gold))'};padding:.8rem 1rem;display:flex;align-items:center;gap:9px">
+        <i class="ti ${a.icon||'ti-run'}" style="font-size:22px;color:rgba(255,255,255,.9)"></i>
+        <span style="color:#fff;font-weight:800;font-size:.88rem">${a.name||''}</span>
+      </div>
+      <div style="padding:.875rem">
+        <p style="font-size:.79rem;color:var(--muted);line-height:1.6;margin-bottom:.65rem">${a.desc||''}</p>
+        <div style="display:flex;gap:5px;flex-wrap:wrap">
+          ${a.time?`<span style="font-size:.69rem;background:var(--off);padding:3px 8px;border-radius:20px;border:1px solid var(--border);color:var(--muted);display:flex;align-items:center;gap:3px"><i class="ti ti-clock" style="font-size:11px"></i>${a.time}</span>`:''}
+          ${a.officer?`<span style="font-size:.69rem;background:var(--off);padding:3px 8px;border-radius:20px;border:1px solid var(--border);color:var(--muted);display:flex;align-items:center;gap:3px"><i class="ti ti-user" style="font-size:11px"></i>${a.officer}</span>`:''}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+/* ════════════════════════════════════════════
+   INSTRUCTORS
+════════════════════════════════════════════ */
+function renderInstructors(){
+  const q=(el('instr-q')||{}).value||'';
+  const dept=(el('instr-dept')||{}).value||'';
+  const g=el('instr-grid');
+  if(!g) return;
+  setEl('instr-count',ST.instructors.length);
+  const f=ST.instructors.filter(i=>i.name.toLowerCase().includes(q.toLowerCase())&&(dept===''||i.dept===dept));
+  if(!f.length){
+    g.innerHTML=`<div class="empty" style="grid-column:1/-1"><i class="ti ti-users"></i><p>${ST.instructors.length?'No results.':'No instructors yet.'}</p></div>`;return;
+  }
+  g.innerHTML=f.map(i=>`
+    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1.1rem;text-align:center;transition:var(--t);position:relative;overflow:hidden" onmouseenter="this.style.boxShadow='var(--shadow)'" onmouseleave="this.style.boxShadow='none'">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--blue2))"></div>
+      <div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--blue2));display:flex;align-items:center;justify-content:center;margin:0 auto .75rem;font-size:1.1rem;font-weight:900;color:#fff;border:3px solid var(--gold2)">${initials(i.name)}</div>
+      <div style="font-size:.88rem;font-weight:800;color:var(--text)">${i.name}</div>
+      <div style="display:inline-block;background:var(--gold-light);color:var(--gold);border:1px solid var(--gold3);padding:2px 10px;border-radius:20px;font-size:.68rem;font-weight:700;margin:.3rem 0">${i.rank||''}</div>
+      <div style="font-size:.73rem;color:var(--muted);margin-bottom:.2rem">${i.dept||''}</div>
+      <div style="font-size:.76rem;color:var(--blue2);font-weight:700;margin-bottom:.65rem">${i.spec||''}</div>
+      <div style="display:flex;justify-content:center;gap:8px">
+        ${i.phone?`<a href="tel:${i.phone}" style="width:30px;height:30px;border-radius:7px;background:var(--blue-light);color:var(--blue2);display:flex;align-items:center;justify-content:center;font-size:14px"><i class="ti ti-phone"></i></a>`:''}
+        ${i.email?`<a href="mailto:${i.email}" style="width:30px;height:30px;border-radius:7px;background:var(--blue-light);color:var(--blue2);display:flex;align-items:center;justify-content:center;font-size:14px"><i class="ti ti-mail"></i></a>`:''}
+      </div>
+    </div>`).join('');
+}
+
+/* ════════════════════════════════════════════
+   OFFICIALS
+════════════════════════════════════════════ */
+function renderOfficials(){
+  const c=el('officials-cont');
+  if(!c) return;
+  if(!ST.officials.length){c.innerHTML=`<div class="empty"><i class="ti ti-crown"></i><p>No officials yet.</p></div>`;return;}
+  const grouped={};
+  ST.officials.forEach(o=>{grouped[o.section=o.section||'Camp Team']=grouped[o.section]||[];grouped[o.section].push(o);});
+  const grads={'Camp Commandant':'linear-gradient(135deg,var(--red-dark),var(--red))','Deputy Commandant':'linear-gradient(135deg,var(--blue),var(--blue2))',default:'linear-gradient(135deg,var(--blue2),var(--blue3))'};
+  c.innerHTML=Object.entries(grouped).map(([sec,mems])=>`
+    <div style="margin-bottom:1.1rem">
+      <div style="padding:.65rem 1rem;display:flex;align-items:center;gap:7px;background:${grads[sec]||grads.default};border-radius:var(--radius) var(--radius) 0 0">
+        <i class="ti ti-star" style="color:var(--gold3);font-size:14px"></i><h3 style="font-size:.85rem;font-weight:800;color:#fff">${sec}</h3>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:9px;padding:.875rem;background:#fff;border:1px solid var(--border);border-top:none;border-radius:0 0 var(--radius) var(--radius)">
+        ${mems.map(m=>`
+          <div style="display:flex;align-items:center;gap:9px;padding:.75rem;border:1px solid var(--border);border-radius:var(--radius);transition:var(--t)" onmouseenter="this.style.background='var(--blue-light)'" onmouseleave="this.style.background='#fff'">
+            <div style="width:42px;height:42px;border-radius:50%;background:${grads[sec]||grads.default};display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:.85rem;flex-shrink:0">${initials(m.name)}</div>
+            <div><div style="font-size:.81rem;font-weight:800;color:var(--text)">${m.name||''}</div><div style="font-size:.68rem;color:var(--gold);font-weight:700">${m.rank||''}</div><div style="font-size:.68rem;color:var(--muted)">${m.appt||''}</div><div style="font-size:.66rem;color:var(--muted)">${m.phone||''}</div></div>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+}
+
+/* ════════════════════════════════════════════
+   TIMETABLE
+════════════════════════════════════════════ */
+let activeDay='';
+function renderTimetable(){
+  const days=Object.keys(ST.timetable).sort();
+  const tabs=el('day-tabs'),body=el('tt-body');
+  if(!tabs||!body) return;
+  if(!days.length){tabs.innerHTML='';body.innerHTML=`<div class="empty" style="padding:2.5rem"><i class="ti ti-calendar-off"></i><p>No schedule yet.</p></div>`;return;}
+  if(!activeDay||!days.includes(activeDay)) activeDay=days[0];
+  tabs.innerHTML=days.map(d=>`<button style="background:${d===activeDay?'var(--blue)':'#fff'};color:${d===activeDay?'#fff':'var(--muted)'};border:1.5px solid ${d===activeDay?'var(--blue)':'var(--border)'};border-radius:8px;padding:6px 14px;font-size:.79rem;font-weight:700;cursor:pointer;transition:var(--t)" onclick="switchDay('${d}')">${d}</button>`).join('');
+  const rows=ST.timetable[activeDay]||[];
+  if(!rows.length){body.innerHTML=`<div class="empty" style="padding:2rem"><p>No sessions for this day.</p></div>`;return;}
+  body.innerHTML=rows.map(r=>`
+    <div style="display:grid;grid-template-columns:85px 1fr 120px 140px;gap:10px;align-items:center;padding:.8rem 1.1rem;border-bottom:1px solid var(--border);font-size:.82rem;transition:var(--t);${r.now?'background:#fffde8;border-left:4px solid var(--gold2)':''}" onmouseenter="this.style.background='var(--blue-light)'" onmouseleave="this.style.background='${r.now?'#fffde8':'transparent'}'">
+      <div style="font-weight:800;color:var(--blue);font-size:.8rem;font-variant-numeric:tabular-nums">${r.time||''}${r.now?`<span style="display:inline-block;background:var(--gold2);color:var(--blue);font-size:.6rem;font-weight:900;padding:1px 6px;border-radius:9px;margin-left:5px">NOW</span>`:''}</div>
+      <div><div style="font-weight:700;color:var(--text)">${r.activity||''}</div>${r.desc?`<div style="font-size:.71rem;color:var(--muted);margin-top:1px">${r.desc}</div>`:''}</div>
+      <div style="font-size:.76rem;color:var(--muted);display:flex;align-items:center;gap:3px"><i class="ti ti-map-pin" style="font-size:11px"></i>${r.venue||'—'}</div>
+      <div style="font-size:.76rem;color:var(--blue2);font-weight:700">${r.instructor||'—'}</div>
+    </div>`).join('');
+}
+function switchDay(d){activeDay=d;renderTimetable();}
+
+/* ════════════════════════════════════════════
+   GALLERY
+════════════════════════════════════════════ */
+let galCat='All';
+function renderGallery(){
+  const cats=['All',...new Set(ST.gallery.map(g=>g.cat).filter(Boolean))];
+  el('gcats').innerHTML=cats.map(c=>`<button style="background:${c===galCat?'var(--blue)':'#fff'};color:${c===galCat?'#fff':'var(--muted)'};border:1.5px solid ${c===galCat?'var(--blue)':'var(--border)'};border-radius:20px;padding:4px 13px;font-size:.75rem;font-weight:700;cursor:pointer;transition:var(--t)" onclick="switchGal('${c}')">${c}</button>`).join('');
+  const items=galCat==='All'?ST.gallery:ST.gallery.filter(g=>g.cat===galCat);
+  const g=el('ggrid');
+  if(!items.length){g.innerHTML=`<div class="empty" style="grid-column:1/-1"><i class="ti ti-photo-off"></i><p>No media yet.</p></div>`;return;}
+  g.innerHTML=items.map(i=>`
+    <div style="aspect-ratio:4/3;border-radius:var(--radius);overflow:hidden;cursor:pointer;position:relative;background:linear-gradient(135deg,var(--blue-light),var(--gold-light));display:flex;align-items:center;justify-content:center;border:1px solid var(--border);transition:var(--t)" onclick="${i.url?`window.open('${i.url}','_blank')`:''}" onmouseenter="this.style.transform='scale(1.04)';this.style.boxShadow='var(--shadow)'" onmouseleave="this.style.transform='none';this.style.boxShadow='none'">
+      ${i.url?`<img src="${i.url}" alt="${i.label||''}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0">`:`<i class="ti ti-photo" style="font-size:28px;color:var(--blue2)"></i>`}
+      <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(26,58,107,.85));color:#fff;font-size:.71rem;padding:18px 7px 6px;font-weight:700">${i.label||''}</div>
+    </div>`).join('');
+}
+function switchGal(c){galCat=c;renderGallery();}
+
+/* ════════════════════════════════════════════
+   DOWNLOADS
+════════════════════════════════════════════ */
+function renderDownloads(){
+  const g=el('dlgrid');
+  if(!g) return;
+  if(!ST.downloads.length){g.innerHTML=`<div class="empty" style="grid-column:1/-1"><i class="ti ti-file-off"></i><p>No resources yet.</p></div>`;return;}
+  g.innerHTML=ST.downloads.map(d=>`
+    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem;display:flex;align-items:center;gap:11px;cursor:pointer;transition:var(--t)" onclick="${d.url?`window.open('${d.url}','_blank')`:''}" onmouseenter="this.style.borderColor='var(--blue2)'" onmouseleave="this.style.borderColor='var(--border)'">
+      <div style="width:44px;height:44px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;background:${d.type==='pdf'?'#fde8e8':d.type==='doc'?'var(--blue-light)':'var(--gold-light)'};color:${d.type==='pdf'?'var(--red)':d.type==='doc'?'var(--blue2)':'var(--gold)'}"><i class="ti ${d.type==='doc'?'ti-file-word':d.type==='zip'?'ti-file-zip':'ti-file-type-pdf'}"></i></div>
+      <div style="flex:1"><div style="font-size:.83rem;font-weight:800;color:var(--text)">${d.name||''}</div><div style="font-size:.71rem;color:var(--muted)">${d.desc||''}</div></div>
+      <div style="font-size:.69rem;color:var(--muted);flex-shrink:0">${d.size||''}<i class="ti ti-download" style="margin-left:5px;font-size:13px;color:var(--blue2)"></i></div>
+    </div>`).join('');
+}
+
+/* ════════════════════════════════════════════
+   NOTIFICATIONS
+════════════════════════════════════════════ */
+function renderNotifications(){
+  const l=el('notif-list');
+  if(!l) return;
+  if(!ST.notifications.length){l.innerHTML=`<div class="empty"><i class="ti ti-bell-off"></i><p>No notifications yet.</p></div>`;return;}
+  const nm={danger:'ti-urgent',info:'ti-speakerphone',success:'ti-check',warn:'ti-bell'};
+  l.innerHTML=ST.notifications.map(n=>`
+    <div style="background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:1rem;display:flex;gap:11px;transition:var(--t)" onmouseenter="this.style.boxShadow='var(--shadow)'" onmouseleave="this.style.boxShadow='none'">
+      <div style="width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;background:${n.type==='danger'?'#fde8e8':n.type==='success'?'var(--success-light)':n.type==='warn'?'var(--gold-light)':'var(--blue-light)'};color:${n.type==='danger'?'var(--red)':n.type==='success'?'var(--success)':n.type==='warn'?'var(--gold)':'var(--blue2)'}"><i class="ti ${nm[n.type]||'ti-bell'}"></i></div>
+      <div><div style="font-size:.85rem;font-weight:800;color:var(--text);margin-bottom:.2rem">${n.title||''}</div><div style="font-size:.79rem;color:var(--muted);line-height:1.55">${n.body||''}</div><div style="font-size:.68rem;color:var(--muted);margin-top:.3rem">${fmtTs(n.createdAt)}</div></div>
+    </div>`).join('');
+}
+
+/* ════════════════════════════════════════════
+   ADMIN
+════════════════════════════════════════════ */
+async function adminLogin(){
+  const email=v('a-email'),pass=v('a-pass'),err=el('a-err');
+  err.style.display='none';
+  if(!email||!pass){err.style.display='block';err.textContent='Enter email and password.';return;}
+  try{
+    await auth.signInWithEmailAndPassword(email,pass);
+    toast('Login successful','success');
+    logAction('🔐 Admin login: '+email);
+  }catch(e){
+    err.style.display='block';
+    err.textContent=e.code==='auth/user-not-found'||e.code==='auth/wrong-password'?'Invalid email or password.':e.message;
+  }
+}
+async function adminLogout(){
+  try{await auth.signOut();toast('Logged out');}catch(e){}
+  closePanel();
+}
+
+/* ── PAYMENT RECORDS ── */
+function renderPaymentRecords(){
+  const pb=el('panel-body');
+  if(!pb||!pb.dataset.type==='pay-records') return;
+  const regs=ST.registrations;
+  pb.innerHTML=`
+    <div class="sr" style="margin-bottom:.875rem">
+      <input class="si" id="pr-q" placeholder="Search name, ID, ref…" oninput="filterRecords()" style="flex:1">
+      <select class="si" id="pr-status" onchange="filterRecords()" style="max-width:160px">
+        <option value="">All Status</option><option value="paid">Paid</option><option value="pending">Pending</option><option value="failed">Failed</option>
+      </select>
+      <select class="si" id="pr-cat" onchange="filterRecords()" style="max-width:160px">
+        <option value="">All Categories</option>
+        ${ST.categories.map(c=>`<option value="${c.id}">${c.name}</option>`).join('')}
+      </select>
+    </div>
+    <div class="tw"><table class="tbl">
+      <thead><tr><th>#</th><th>Name</th><th>Category</th><th>Amount</th><th>Ref</th><th>Status</th><th>Date</th><th>Action</th></tr></thead>
+      <tbody id="pr-tbody"></tbody>
+    </table></div>`;
+  pb.dataset.type='pay-records';
+  filterRecords();
+}
+
+function filterRecords(){
+  const q=(v('pr-q')||'').toLowerCase();
+  const stat=v('pr-status');
+  const cat=v('pr-cat');
+  const tbody=el('pr-tbody');
+  if(!tbody) return;
+  const f=ST.registrations.filter(r=>
+    (!q||(r.name||'').toLowerCase().includes(q)||(r.regId||'').toLowerCase().includes(q)||(r.paymentRef||'').toLowerCase().includes(q))&&
+    (!stat||(r.paymentStatus||'')=== stat)&&
+    (!cat||(r.category||'')=== cat)
+  );
+  if(!f.length){tbody.innerHTML=`<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--muted)">No records found.</td></tr>`;return;}
+  tbody.innerHTML=f.map((r,i)=>`
+    <tr>
+      <td style="color:var(--muted);font-size:.76rem">${i+1}</td>
+      <td style="font-weight:700">${r.name||'—'}</td>
+      <td><span class="tag blue">${r.categoryName||r.category||'—'}</span></td>
+      <td style="font-weight:800;color:var(--blue)">₦${(r.totalAmount||0).toLocaleString()}</td>
+      <td style="font-family:monospace;font-size:.72rem;color:var(--muted)">${(r.paymentRef||'').slice(0,20)}</td>
+      <td><span class="status-badge ${r.paymentStatus==='paid'?'sb-paid':r.paymentStatus==='failed'?'sb-failed':'sb-pending'}">${r.paymentStatus||'pending'}</span></td>
+      <td style="font-size:.74rem;color:var(--muted)">${r.paymentDate?new Date(r.paymentDate).toLocaleDateString():fmtTs(r.createdAt)}</td>
+      <td>${r.paymentStatus!=='paid'?`<button class="btn green sm" onclick="manualVerify('${r.id||r.regId}','${r.regId}')"><i class="ti ti-check"></i>Verify</button>`:`<button class="btn outline sm" onclick="viewReceipt('${r.id||r.regId}')"><i class="ti ti-eye"></i></button>`}</td>
+    </tr>`).join('');
+}
+
+async function manualVerify(fsId,regId){
+  if(!confirm('Mark this registration as PAID?')) return;
+  try{
+    if(fbReady&&fsId&&!fsId.startsWith('local'))
+      await fsUpdate('registrations',fsId,{paymentStatus:'paid',registrationStatus:'active',verifiedBy:'admin',verifiedAt:new Date().toISOString()});
+    const r=ST.registrations.find(r=>r.id===fsId||r.regId===regId);
+    if(r){r.paymentStatus='paid';r.registrationStatus='active';}
+    toast('Payment verified for '+regId,'success');
+    logAction('✅ Manual verify: '+regId);
+    filterRecords(); updateStats();
+  }catch(e){toast('Error: '+e.message,'error');}
+}
+
+function viewReceipt(id){
+  const r=ST.registrations.find(x=>x.id===id||x.regId===id);
+  if(!r) return;
+  openModalRaw('Registration — '+r.name,`
+    <div class="r-row"><span class="r-lbl">ID</span><span class="r-val" style="font-family:monospace;color:var(--blue2)">${r.regId}</span></div>
+    <div class="r-row"><span class="r-lbl">Name</span><span class="r-val">${r.name}</span></div>
+    <div class="r-row"><span class="r-lbl">Category</span><span class="r-val">${r.categoryName}</span></div>
+    <div class="r-row"><span class="r-lbl">Rank</span><span class="r-val">${r.rank}</span></div>
+    <div class="r-row"><span class="r-lbl">Outpost</span><span class="r-val">${r.outpost}</span></div>
+    <div class="r-row"><span class="r-lbl">Phone</span><span class="r-val">${r.phone}</span></div>
+    <div class="r-row"><span class="r-lbl">Email</span><span class="r-val">${r.email}</span></div>
+    <div class="r-row"><span class="r-lbl">Amount</span><span class="r-val" style="font-weight:900;color:var(--blue)">₦${(r.totalAmount||0).toLocaleString()}</span></div>
+    <div class="r-row"><span class="r-lbl">Status</span><span class="r-val"><span class="status-badge ${r.paymentStatus==='paid'?'sb-paid':'sb-pending'}">${r.paymentStatus}</span></span></div>
+    <div class="r-row"><span class="r-lbl">Ref</span><span class="r-val" style="font-family:monospace">${r.paymentRef}</span></div>
+  `);
+}
+
+/* ── EXPORT ── */
+function exportPayments(){
+  const rows=ST.registrations.map((r,i)=>`${i+1}\t${r.name}\t${r.categoryName||''}\t${r.outpost}\t${r.rank}\t₦${r.totalAmount||0}\t${r.paymentStatus}\t${r.paymentRef}\t${r.regId}`).join('\n');
+  const headers='#\tName\tCategory\tOutpost\tRank\tAmount\tStatus\tRef\tReg ID';
+  const w=window.open('','_blank');
+  w.document.write(`<html><head><title>Payment Report — Royal Rangers Zonal Camp</title>
+  <style>body{font-family:sans-serif;padding:2rem}h2{color:#1a3a6b}table{border-collapse:collapse;width:100%;font-size:12px}th{background:#1a3a6b;color:#fff;padding:8px 10px;text-align:left}td{padding:7px 10px;border-bottom:1px solid #dde3f0}tr:nth-child(even)td{background:#f7f8fc}</style></head>
+  <body><h2>🛡️ Royal Rangers Zonal Camp — Payment Report</h2>
+  <p>Generated: ${new Date().toLocaleString()} | Total: ${ST.registrations.length} | Paid: ${ST.registrations.filter(r=>r.paymentStatus==='paid').length}</p>
+  <table><thead><tr>${headers.split('\t').map(h=>`<th>${h}</th>`).join('')}</tr></thead>
+  <tbody>${rows.split('\n').map(r=>`<tr>${r.split('\t').map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</tbody></table>
+  <script>window.print()<\/script></body></html>`);
+  w.document.close();
+  logAction('📊 Payment report exported');
+}
+
+/* ════════════════════════════════════════════
+   ADMIN PANEL FORMS
+════════════════════════════════════════════ */
+const PANELS={
+  'pay-records':{title:'Payment Records',html:`<div class="loading"><div class="spin"></div>Loading records…</div>`,onopen:renderPaymentRecords},
+  'verify-payment':{title:'Manual Payment Verification',html:`
+    <div class="fg"><label>Registration ID or Payment Reference</label><input id="pf-vid" placeholder="RRC-2025-0001"></div>
+    <button class="btn green" onclick="manualVerifyByInput()"><i class="ti ti-check-circle"></i>Verify Payment</button>`},
+  'add-category':{title:'Registration Categories',html:`
+    <p class="text-muted" style="margin-bottom:1rem">Current categories. Add new or edit fees:</p>
+    <div id="cat-list-admin"></div>
+    <div class="fdiv">Add New Category</div>
+    <div class="fg2">
+      <div class="fg"><label>Category Name *</label><input id="pf-cname" placeholder="e.g. NCO"></div>
+      <div class="fg"><label>Label</label><input id="pf-clabel" placeholder="e.g. Non-Commissioned Officer"></div>
+    </div>
+    <div class="fg2">
+      <div class="fg"><label>Fee (₦) *</label><input type="number" id="pf-cfee" placeholder="e.g. 8000"></div>
+      <div class="fg"><label>Processing Fee (₦)</label><input type="number" id="pf-cproc" placeholder="e.g. 200"></div>
+    </div>
+    <div class="fg"><label>Description</label><input id="pf-cdesc" placeholder="Category description"></div>
+    <button class="btn blue" onclick="saveCategory()"><i class="ti ti-plus"></i>Add Category</button>`,
+    onopen:()=>{
+      const l=el('cat-list-admin');
+      if(l) l.innerHTML=ST.categories.map(c=>`<div style="display:flex;justify-content:space-between;align-items:center;padding:.5rem .75rem;background:var(--off);border-radius:8px;margin-bottom:.5rem;font-size:.82rem"><span><strong>${c.name}</strong> — ${c.label||''}</span><span style="font-weight:800;color:var(--blue)">₦${(c.price||0).toLocaleString()}</span></div>`).join('');
+    }},
+  'bank-settings':{title:'Bank / Payment Details',html:`
+    <div class="fg"><label>Bank Name</label><input id="pf-bname" placeholder="e.g. First Bank of Nigeria"></div>
+    <div class="fg"><label>Account Name</label><input id="pf-bacctname" placeholder="Account name"></div>
+    <div class="fg"><label>Account Number</label><input id="pf-bacctnum" placeholder="10-digit account number"></div>
+    <div class="fdiv">Payment Gateway Keys</div>
+    <div class="fg"><label>Paystack Public Key</label><input id="pf-psk" placeholder="pk_live_… or pk_test_…"></div>
+    <div class="fg"><label>Flutterwave Public Key</label><input id="pf-fwk" placeholder="FLWPUBK-…"></div>
+    <button class="btn blue" onclick="saveBankSettings()"><i class="ti ti-check"></i>Save</button>`},
+  'post-announce':{title:'Post Announcement',html:`
+    <div class="fg"><label>Title *</label><input id="pf-antitle" placeholder="Announcement title"></div>
+    <div class="fg"><label>Body *</label><textarea id="pf-anbody" placeholder="Content…"></textarea></div>
+    <div class="fg"><label>Type</label><select id="pf-antype"><option value="info">Info</option><option value="urgent">Urgent</option><option value="update">Update</option></select></div>
+    <button class="btn red" onclick="saveDoc('announcements',{title:v('pf-antitle'),body:v('pf-anbody'),type:v('pf-antype')})">Post</button>`},
+  'add-notification':{title:'Send Notification',html:`
+    <div class="fg"><label>Title *</label><input id="pf-ntitle" placeholder="Notification title"></div>
+    <div class="fg"><label>Body *</label><textarea id="pf-nbody" placeholder="Content…"></textarea></div>
+    <div class="fg"><label>Type</label><select id="pf-ntype"><option value="info">Info</option><option value="danger">Urgent</option><option value="success">Success</option><option value="warn">Warning</option></select></div>
+    <button class="btn red" onclick="saveDoc('notifications',{title:v('pf-ntitle'),body:v('pf-nbody'),type:v('pf-ntype')})">Send</button>`},
+  'add-timetable':{title:'Add Timetable Entry',html:`
+    <div class="fg2">
+      <div class="fg"><label>Day *</label><input id="pf-tday" placeholder="e.g. Day 1"></div>
+      <div class="fg"><label>Time *</label><input id="pf-ttime" placeholder="e.g. 06:00"></div>
+    </div>
+    <div class="fg"><label>Activity *</label><input id="pf-tactivity" placeholder="Activity name"></div>
+    <div class="fg"><label>Description</label><input id="pf-tdesc" placeholder="Short description"></div>
+    <div class="fg2">
+      <div class="fg"><label>Venue</label><input id="pf-tvenue" placeholder="Location"></div>
+      <div class="fg"><label>Instructor</label><input id="pf-tinstr" placeholder="Name"></div>
+    </div>
+    <button class="btn blue" onclick="saveTimetable()">Add</button>`},
+  'add-activity':{title:'Add Activity',html:`
+    <div class="fg"><label>Name *</label><input id="pf-aname" placeholder="Activity name"></div>
+    <div class="fg"><label>Description</label><textarea id="pf-adesc" placeholder="Description…"></textarea></div>
+    <div class="fg2">
+      <div class="fg"><label>Time</label><input id="pf-atime" placeholder="e.g. Daily 06:00"></div>
+      <div class="fg"><label>Officer</label><input id="pf-aofficer" placeholder="Name"></div>
+    </div>
+    <div class="fg"><label>Icon (ti-run, ti-mountain, etc.)</label><input id="pf-aicon" placeholder="ti-run"></div>
+    <button class="btn blue" onclick="saveDoc('activities',{name:v('pf-aname'),desc:v('pf-adesc'),time:v('pf-atime'),officer:v('pf-aofficer'),icon:v('pf-aicon')||'ti-run'})">Save</button>`},
+  'add-instructor':{title:'Add Instructor',html:`
+    <div class="fg2">
+      <div class="fg"><label>Full Name *</label><input id="pf-iname" placeholder="Full name"></div>
+      <div class="fg"><label>Rank</label><input id="pf-irank" placeholder="e.g. Captain"></div>
+    </div>
+    <div class="fg2">
+      <div class="fg"><label>Department</label><select id="pf-idept"><option value="">Select</option><option>Spiritual</option><option>Drill &amp; Parade</option><option>Medical</option><option>Leadership</option><option>Sports</option><option>Survival Skills</option></select></div>
+      <div class="fg"><label>Specialization</label><input id="pf-ispec" placeholder="Area of expertise"></div>
+    </div>
+    <div class="fg2">
+      <div class="fg"><label>Phone</label><input id="pf-iphone" placeholder="+234…"></div>
+      <div class="fg"><label>Email</label><input type="email" id="pf-iemail" placeholder="email@…"></div>
+    </div>
+    <button class="btn blue" onclick="saveDoc('instructors',{name:v('pf-iname'),rank:v('pf-irank'),dept:v('pf-idept'),spec:v('pf-ispec'),phone:v('pf-iphone'),email:v('pf-iemail')})">Save</button>`},
+  'add-official':{title:'Add Official',html:`
+    <div class="fg"><label>Full Name *</label><input id="pf-oname" placeholder="Full name"></div>
+    <div class="fg2">
+      <div class="fg"><label>Rank</label><input id="pf-orank" placeholder="e.g. Colonel"></div>
+      <div class="fg"><label>Section *</label><input id="pf-osec" placeholder="e.g. Camp Commandant"></div>
+    </div>
+    <div class="fg2">
+      <div class="fg"><label>Appointment</label><input id="pf-oappt" placeholder="Role title"></div>
+      <div class="fg"><label>Phone</label><input id="pf-ophone" placeholder="+234…"></div>
+    </div>
+    <button class="btn blue" onclick="saveDoc('officials',{name:v('pf-oname'),rank:v('pf-orank'),section:v('pf-osec'),appt:v('pf-oappt'),phone:v('pf-ophone')})">Save</button>`},
+  'add-gallery':{title:'Add Gallery Media',html:`
+    <div class="fg"><label>Caption *</label><input id="pf-glabel" placeholder="e.g. Opening Parade"></div>
+    <div class="fg"><label>Category</label><input id="pf-gcat" placeholder="e.g. Parade, Sports"></div>
+    <div class="fg"><label>Image URL (Firebase Storage)</label><input id="pf-gurl" placeholder="https://firebasestorage.googleapis.com/…"></div>
+    <button class="btn blue" onclick="saveDoc('gallery',{label:v('pf-glabel'),cat:v('pf-gcat'),url:v('pf-gurl')})">Add</button>`},
+  'add-download':{title:'Add Resource',html:`
+    <div class="fg"><label>Name *</label><input id="pf-dname" placeholder="e.g. Camp Manual 2025"></div>
+    <div class="fg"><label>Description</label><input id="pf-ddesc" placeholder="Short description"></div>
+    <div class="fg2">
+      <div class="fg"><label>Type</label><select id="pf-dtype"><option value="pdf">PDF</option><option value="doc">Word</option><option value="zip">ZIP</option></select></div>
+      <div class="fg"><label>Size</label><input id="pf-dsize" placeholder="e.g. 2.4 MB"></div>
+    </div>
+    <div class="fg"><label>URL</label><input id="pf-durl" placeholder="https://…"></div>
+    <button class="btn blue" onclick="saveDoc('downloads',{name:v('pf-dname'),desc:v('pf-ddesc'),type:v('pf-dtype'),size:v('pf-dsize'),url:v('pf-durl')})">Add</button>`},
+  'camp-settings':{title:'Camp Settings',html:`
+    <div class="fg"><label>Camp Title</label><input id="pf-ctitle" placeholder="Royal Rangers\\nZonal Camping Program"></div>
+    <div class="fg"><label>Motto</label><input id="pf-cmotto" placeholder="Rangers Lead the Way!"></div>
+    <div class="fg"><label>Scripture</label><input id="pf-cverse" placeholder="Joshua 1:9 — …"></div>
+    <div class="fg2">
+      <div class="fg"><label>Camp Opening Date</label><input type="date" id="pf-cdate"></div>
+      <div class="fg"><label>Camp Days</label><input type="number" id="pf-cdays" placeholder="5"></div>
+    </div>
+    <div class="fg"><label>Location</label><input id="pf-cloc" placeholder="Camp Olive, Abuja FCT"></div>
+    <div class="fdiv">Contacts</div>
+    <div class="fg2">
+      <div class="fg"><label>Email</label><input id="pf-cemail" placeholder="camp@rangers.org"></div>
+      <div class="fg"><label>Phone</label><input id="pf-cphone" placeholder="+234…"></div>
+    </div>
+    <div class="fg"><label>Emergency Contacts</label><input id="pf-cemerg" placeholder="Medical: +234… | Security: +234…"></div>
+    <button class="btn blue" onclick="saveCampSettings()">Save Settings</button>`}
+};
+
+function openPanel(key){
+  const p=PANELS[key];if(!p) return;
+  el('panel-title').textContent=p.title;
+  el('panel-body').innerHTML=p.html;
+  el('panel-body').dataset.type=key;
+  el('admin-panel').classList.add('show');
+  el('admin-panel').scrollIntoView({behavior:'smooth',block:'nearest'});
+  if(p.onopen) p.onopen();
+}
+function closePanel(){el('admin-panel').classList.remove('show');}
+
+/* ── SAVE FUNCS ── */
+async function saveDoc(col,data){
+  const nameField=data.name||data.title;
+  if(!nameField){toast('Required field is empty.','error');return;}
+  try{
+    if(fbReady){
+      await fsAdd(col,data);
+      const fresh=await fsCol(col);
+      ST[col]=fresh;
+    } else {
+      ST[col]=ST[col]||[];ST[col].push(data);
+    }
+    updateStats();closePanel();
+    toast((data.name||data.title)+' saved!','success');
+    logAction('✅ Added to '+col+': '+(data.name||data.title));
+    renderAll();
+  }catch(e){toast('Error: '+e.message,'error');}
+}
+
+async function saveTimetable(){
+  const day=v('pf-tday'),activity=v('pf-tactivity');
+  if(!day||!activity){toast('Day and activity required.','error');return;}
+  const entry={day,time:v('pf-ttime'),activity,desc:v('pf-tdesc'),venue:v('pf-tvenue'),instructor:v('pf-tinstr')};
+  try{
+    if(fbReady) await fsAdd('timetable',entry);
+    ST.timetable[day]=ST.timetable[day]||[];
+    ST.timetable[day].push(entry);
+    ST.timetable[day].sort((a,b)=>(a.time||'').localeCompare(b.time||''));
+    closePanel();toast('Session added to '+day,'success');
+    logAction('✅ Timetable: '+day+' — '+activity);
+    renderTimetable();
+  }catch(e){toast('Error: '+e.message,'error');}
+}
+
+async function saveCategory(){
+  const name=v('pf-cname'),fee=parseInt(v('pf-cfee'));
+  if(!name||!fee){toast('Name and fee required.','error');return;}
+  const cat={id:name.toLowerCase().replace(/\s+/g,'_'),name,label:v('pf-clabel'),price:fee,proc:parseInt(v('pf-cproc'))||0,desc:v('pf-cdesc'),icon:'🎖️',perks:[]};
+  try{
+    if(fbReady) await fsAdd('categories',cat);
+    ST.categories.push(cat);
+    renderCategories();closePanel();
+    toast('Category '+name+' added!','success');
+    logAction('✅ Category added: '+name);
+  }catch(e){toast('Error: '+e.message,'error');}
+}
+
+async function saveBankSettings(){
+  const bank={name:v('pf-bname'),acctName:v('pf-bacctname'),acctNum:v('pf-bacctnum')};
+  const keys={paystackKey:v('pf-psk'),flutterwaveKey:v('pf-fwk')};
+  try{
+    if(fbReady){await fsSet('settings','bank',bank);await fsSet('settings','camp',keys);}
+    Object.assign(ST.bank,bank);Object.assign(ST.settings,keys);
+    closePanel();toast('Bank details saved!','success');
+    logAction('🏦 Bank settings updated');
+  }catch(e){toast('Error: '+e.message,'error');}
+}
+
+async function saveCampSettings(){
+  const s={
+    title:v('pf-ctitle'),motto:v('pf-cmotto'),verse:v('pf-cverse'),
+    campDate:v('pf-cdate'),days:parseInt(v('pf-cdays'))||0,
+    location:v('pf-cloc'),email:v('pf-cemail'),phone:v('pf-cphone'),emergency:v('pf-cemerg')
+  };
+  Object.keys(s).forEach(k=>{if(!s[k]&&s[k]!==0) delete s[k];});
+  try{
+    if(fbReady) await fsSet('settings','camp',s);
+    Object.assign(ST.settings,s);
+    if(s.campDate) ST.settings.campDate=s.campDate;
+    applySettings(s);applyContactInfo();
+    closePanel();toast('Settings saved!','success');
+    logAction('⚙️ Camp settings updated');
+  }catch(e){toast('Error: '+e.message,'error');}
+}
+
+async function manualVerifyByInput(){
+  const q=v('pf-vid');
+  if(!q){toast('Enter an ID.','error');return;}
+  const r=ST.registrations.find(x=>x.regId===q||x.paymentRef===q);
+  if(!r){toast('Registration not found.','error');return;}
+  await manualVerify(r.id||r.regId,r.regId);
+}
+
+/* ════════════════════════════════════════════
+   CONTACT
+════════════════════════════════════════════ */
+async function sendMsg(){
+  const n=v('cf-n'),m=v('cf-m');
+  if(!n||!m){toast('Name and message required.','error');return;}
+  try{
+    if(fbReady) await fsAdd('messages',{name:n,email:v('cf-e'),message:m});
+    toast('Message sent!','success');
+    ['cf-n','cf-e','cf-m'].forEach(id=>{const e2=el(id);if(e2)e2.value='';});
+  }catch(e){toast('Error: '+e.message,'error');}
+}
+
+/* ════════════════════════════════════════════
+   MODAL
+════════════════════════════════════════════ */
+function openModalRaw(title,html){
+  el('modal-title').textContent=title;
+  el('modal-body').innerHTML=html;
+  el('modal-overlay').classList.add('open');
+}
+function closeModal(e){
+  if(!e||e.target===el('modal-overlay')) el('modal-overlay').classList.remove('open');
+}
+
+/* ════════════════════════════════════════════
+   LOG
+════════════════════════════════════════════ */
+function logAction(text){
+  ST.logs.unshift({text,time:new Date().toLocaleTimeString()});
+  if(ST.logs.length>30) ST.logs.pop();
+  const al=el('alog');
+  if(al) al.innerHTML=ST.logs.map(l=>`<div class="log-item"><span style="color:var(--text)">${l.text}</span><span style="font-size:.71rem;color:var(--muted)">${l.time}</span></div>`).join('');
+}
+
+/* ════════════════════════════════════════════
+   COUNTDOWN
+════════════════════════════════════════════ */
+function tickCountdown(){
+  const dt=ST.settings.campDate;
+  if(!dt){['cd-d','cd-h','cd-m','cd-s'].forEach(id=>{const e2=el(id);if(e2)e2.textContent='--';});return;}
+  const diff=new Date(dt)-new Date();
+  if(diff<=0){el('cd-d').textContent='🏕';el('cd-h').textContent='LIVE';el('cd-m').textContent='NOW';el('cd-s').textContent='!';return;}
+  const d=Math.floor(diff/864e5),h=Math.floor(diff%864e5/36e5),m=Math.floor(diff%36e5/6e4),s=Math.floor(diff%6e4/1e3);
+  setEl('cd-d',String(d).padStart(2,'0'));setEl('cd-h',String(h).padStart(2,'0'));
+  setEl('cd-m',String(m).padStart(2,'0'));setEl('cd-s',String(s).padStart(2,'0'));
+}
+setInterval(tickCountdown,1000);
+
+/* ════════════════════════════════════════════
+   NAV
+════════════════════════════════════════════ */
+function go(id,btn){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  el('page-'+id).classList.add('active');
+  document.querySelectorAll('.nb').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  const rmap={activities:renderActivities,instructors:renderInstructors,officials:renderOfficials,notifications:renderNotifications,gallery:renderGallery,downloads:renderDownloads,timetable:renderTimetable,home:()=>{renderHomeAnn();updateStats();}};
+  if(rmap[id]) rmap[id]();
+}
+function toggleMenu(){el('mobmenu').classList.toggle('open');}
+
+/* ════════════════════════════════════════════
+   UTILS
+════════════════════════════════════════════ */
+function el(id){return document.getElementById(id);}
+function v(id){const e2=el(id);return e2?(e2.value||'').trim():'';}
+function setEl(id,val){const e2=el(id);if(e2)e2.textContent=val;}
+function initials(n){return (n||'').split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();}
+function fmtNaira(n){return (n||0).toLocaleString();}
+function fmtTs(ts){
+  if(!ts) return '';
+  try{
+    const d=ts.toDate?ts.toDate():new Date(ts);
+    const diff=Date.now()-d;
+    if(diff<60e3) return 'Just now';
+    if(diff<36e5) return Math.floor(diff/60e3)+'m ago';
+    if(diff<864e5) return Math.floor(diff/36e5)+'h ago';
+    return d.toLocaleDateString('en-GB',{day:'numeric',month:'short'});
+  }catch(_){return '';}
+}
+
+let toastT;
+function toast(msg,type='info'){
+  const t=el('toast');
+  t.textContent=msg;
+  t.className='toast show '+(type==='success'?'success':type==='error'?'error':'info');
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+/* ════════════════════════════════════════════
+   BOOT
+════════════════════════════════════════════ */
+window.addEventListener('load',()=>setTimeout(initFB,300));
+</script>
+</body>
+</html>
